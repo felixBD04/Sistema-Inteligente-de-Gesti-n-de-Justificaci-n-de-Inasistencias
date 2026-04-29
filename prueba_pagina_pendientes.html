@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Panel de Revisión</title>
+</head>
+<body>
+
+<h1>Solicitudes Pendientes</h1>
+<div id="tabla"></div>
+
+<script>
+fetch("https://docs.google.com/spreadsheets/d/e/2PACX-1vTx5wMHyzgKJIfdQhRB_hmCc_uxftRTKgl21hFc-vfwPxdTf_eoqv-tWQIuOBuzkAJ-3jTMggP3ShHl/pub?output=csv&gid=1198437236")
+  .then(res => res.text())
+  .then(data => {
+    const filas = data.split("\n").slice(1);
+
+    let html = "<table border='1'>";
+    html += "<tr><th>Nombre</th><th>Correo</th><th>Archivo</th></tr>";
+
+    filas.forEach(fila => {
+      const cols = fila.split(",");
+
+      const nombre = cols[2];
+      const correo = cols[4];
+      const fileId = cols[7];
+
+      console.log("Fila:", cols);
+console.log("FileID:", fileId);
+
+      const link = `https://drive.google.com/file/d/${fileId}/view`;
+
+      html += `
+        <tr>
+          <td>${nombre}</td>
+          <td>${correo}</td>
+          <td><a href="${link}" target="_blank">Ver archivo</a></td>
+        </tr>
+      `;
+    });
+
+    html += "</table>";
+    document.getElementById("tabla").innerHTML = html;
+  });
+</script>
+
+</body>
+</html>
