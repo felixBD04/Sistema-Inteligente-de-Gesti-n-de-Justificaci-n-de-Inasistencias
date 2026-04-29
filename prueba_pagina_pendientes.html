@@ -1,45 +1,121 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Panel de Revisión</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 24px; }
+    table { border-collapse: collapse; width: 100%; margin-top: 16px; }
+    th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+    th { background-color: #f5f5f5; }
+    .acciones { display: flex; gap: 8px; }
+    button { border: none; border-radius: 6px; padding: 8px 12px; cursor: pointer; }
+    .btn-validar { background: #1f9d55; color: white; }
+    .btn-invalidar { background: #d64545; color: white; }
+    .estado { font-size: 0.9rem; color: #555; }
+  </style>
 </head>
 <body>
 
 <h1>Solicitudes Pendientes</h1>
-<div id="tabla"></div>
+<p class="estado">Usa los botones para indicar si la inasistencia es <strong>válida</strong> o <strong>inválida</strong>.</p>
+<div id="tabla">Cargando solicitudes...</div>
 
 <script>
-fetch("https://docs.google.com/spreadsheets/d/e/2PACX-1vTx5wMHyzgKJIfdQhRB_hmCc_uxftRTKgl21hFc-vfwPxdTf_eoqv-tWQIuOBuzkAJ-3jTMggP3ShHl/pub?output=csv&gid=1198437236")
+const CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTx5wMHyzgKJIfdQhRB_hmCc_uxftRTKgl21hFc-vfwPxdTf_eoqv-tWQIuOBuzkAJ-3jTMggP3ShHl/pub?output=csv&gid=1198437236";
+const REVIEW_WEBHOOK_URL = "https://felix04.app.n8n.cloud/webhook-test/revision_inasistencias";
+
+function escaparHTML(texto) {
+  const div = document.createElement("div");
+  div.innerText = texto ?? "";
+  return div.innerHTML;
+}
+
+async function enviarRevision(accion, datosFila, boton) {
+  const textoOriginal = boton.textContent;
+  boton.disabled = true;
+  boton.textContent = "Enviando...";
+
+  try {
+    const payload = {
+      accion,
+      fechaRevision: new Date().toISOString(),
+      registro: datosFila
+    };
+
+    const response = await fetch(REVIEW_WEBHOOK_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    });
+
+    if (!response.ok) {
+      throw new Error(`El webhook respondió con estado ${response.status}`);
+    }
+
+    alert(`Solicitud marcada como ${accion.toUpperCase()} y enviada a n8n.`);
+  } catch (error) {
+    console.error("Error al enviar revisión:", error);
+    alert("No se pudo enviar la revisión a n8n. Revisa la URL del webhook y que el flujo esté activo.");
+  } finally {
+    boton.disabled = false;
+    boton.textContent = textoOriginal;
+  }
+}
+
+fetch(CSV_URL)
   .then(res => res.text())
   .then(data => {
-    const filas = data.split("\n").slice(1);
+    const filas = data.split("\n").slice(1).filter(fila => fila.trim() !== "");
 
-    let html = "<table border='1'>";
-    html += "<tr><th>Nombre</th><th>Correo</th><th>Archivo</th></tr>";
+    let html = "<table>";
+    html += "<tr><th>Nombre</th><th>Correo</th><th>Archivo</th><th>Acciones</th></tr>";
 
-    filas.forEach(fila => {
+    filas.forEach((fila, index) => {
       const cols = fila.split(",");
-
-      const nombre = cols[2];
-      const correo = cols[4];
-      const fileId = cols[7];
-
-      console.log("Fila:", cols);
-console.log("FileID:", fileId);
-
-      const link = `https://drive.google.com/file/d/${fileId}/view`;
+      const nombre = (cols[2] || "").trim();
+      const correo = (cols[4] || "").trim();
+      const fileId = (cols[7] || "").trim();
+      const link = fileId ? `https://drive.google.com/file/d/${fileId}/view` : "#";
 
       html += `
         <tr>
-          <td>${nombre}</td>
-          <td>${correo}</td>
-          <td><a href="${link}" target="_blank">Ver archivo</a></td>
+          <td>${escaparHTML(nombre)}</td>
+          <td>${escaparHTML(correo)}</td>
+          <td>${fileId ? `<a href="${link}" target="_blank" rel="noopener">Ver archivo</a>` : "Sin archivo"}</td>
+          <td class="acciones">
+            <button class="btn-validar" data-index="${index}" data-accion="valida">Validar</button>
+            <button class="btn-invalidar" data-index="${index}" data-accion="invalida">Invalidar</button>
+          </td>
         </tr>
       `;
     });
 
     html += "</table>";
     document.getElementById("tabla").innerHTML = html;
+
+    const botones = document.querySelectorAll("button[data-index]");
+    botones.forEach((boton) => {
+      boton.addEventListener("click", () => {
+        const index = Number(boton.dataset.index);
+        const cols = filas[index].split(",");
+        const datosFila = {
+          fila: index + 2,
+          nombre: (cols[2] || "").trim(),
+          id: (cols[3] || "").trim(),
+          correo: (cols[4] || "").trim(),
+          motivo: (cols[5] || "").trim(),
+          fileId: (cols[7] || "").trim()
+        };
+
+        enviarRevision(boton.dataset.accion, datosFila, boton);
+      });
+    });
+  })
+  .catch((error) => {
+    console.error("Error cargando el CSV:", error);
+    document.getElementById("tabla").innerHTML = "No se pudieron cargar las solicitudes.";
   });
 </script>
 
