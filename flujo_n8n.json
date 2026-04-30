@@ -10,7 +10,7 @@
       "typeVersion": 2.1,
       "position": [
         -576,
-        80
+        -128
       ],
       "id": "65559bb2-fc17-47a4-8ee1-45a983174a6e",
       "name": "Webhook",
@@ -23,8 +23,8 @@
       "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
       "typeVersion": 1.3,
       "position": [
-        8,
-        556
+        16,
+        352
       ],
       "id": "907d6ca0-5ccf-4c48-9a4c-f05bfdd75bf4",
       "name": "Structured Output Parser"
@@ -71,7 +71,7 @@
       "typeVersion": 3.4,
       "position": [
         896,
-        -64
+        -272
       ],
       "id": "d601116e-2df1-4b1c-b8f5-07ebacd96641",
       "name": "Edit Fields"
@@ -154,7 +154,7 @@
       "typeVersion": 3.4,
       "position": [
         1120,
-        -80
+        -288
       ],
       "id": "eca73073-6602-485a-ad2b-93b744e58df0",
       "name": "Switch"
@@ -169,7 +169,7 @@
       "typeVersion": 1.2,
       "position": [
         224,
-        332
+        128
       ],
       "id": "c96cae4c-48f4-466d-99cf-d7b5899e183c",
       "name": "Send a text message",
@@ -192,7 +192,7 @@
       "typeVersion": 3.1,
       "position": [
         -128,
-        332
+        128
       ],
       "id": "6012fdf4-4e81-4840-932a-e73b2a73c81c",
       "name": "AI Agent",
@@ -201,166 +201,6 @@
       "maxTries": 5,
       "waitBetweenTries": 3000,
       "onError": "continueErrorOutput"
-    },
-    {
-      "parameters": {
-        "operation": "appendOrUpdate",
-        "documentId": {
-          "__rl": true,
-          "value": "19YyR8JQLbaspzTVqBjmV0mN5ByUznyc3pY_jOYZZjPU",
-          "mode": "list",
-          "cachedResultName": "Sistema Inteligente de Gestión de Justificación de Inasistencias",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/19YyR8JQLbaspzTVqBjmV0mN5ByUznyc3pY_jOYZZjPU/edit?usp=drivesdk"
-        },
-        "sheetName": {
-          "__rl": true,
-          "value": "gid=0",
-          "mode": "list",
-          "cachedResultName": "aprobadas",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/19YyR8JQLbaspzTVqBjmV0mN5ByUznyc3pY_jOYZZjPU/edit#gid=0"
-        },
-        "columns": {
-          "mappingMode": "defineBelow",
-          "value": {
-            "fecha": "={{ $today }}",
-            "name": "={{ $json.nombre }}",
-            "id_estudiante": "={{ $json.id }}",
-            "correo": "={{ $json.correo }}",
-            "motivo": "={{ $json.motivo }}",
-            "fileName": "={{ $('If1').item.json.fileName }}",
-            "decision_ia": "={{ $('If1').item.json.decision }}",
-            "razon_ia": "={{ $('If1').item.json.razon }}",
-            "confianza_ia": "={{ $('If1').item.json.confianza }}",
-            "file_id": "={{ $('If1').item.json.fileID }}"
-          },
-          "matchingColumns": [
-            "fecha"
-          ],
-          "schema": [
-            {
-              "id": "ID",
-              "displayName": "ID",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": true
-            },
-            {
-              "id": "fecha",
-              "displayName": "fecha",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "name",
-              "displayName": "name",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "id_estudiante",
-              "displayName": "id_estudiante",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "correo",
-              "displayName": "correo",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "motivo",
-              "displayName": "motivo",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "fileName",
-              "displayName": "fileName",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "file_id",
-              "displayName": "file_id",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "decision_ia",
-              "displayName": "decision_ia",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "razon_ia",
-              "displayName": "razon_ia",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "confianza_ia",
-              "displayName": "confianza_ia",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            }
-          ],
-          "attemptToConvertTypes": false,
-          "convertFieldsToString": false
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.googleSheets",
-      "typeVersion": 4.7,
-      "position": [
-        1344,
-        -64
-      ],
-      "id": "384cce09-c94d-4b53-b7d7-ea23bb843b22",
-      "name": "Append or update row in sheet",
-      "credentials": {
-        "googleSheetsOAuth2Api": {
-          "id": "cpakxWaQFPMyl5io",
-          "name": "Google Sheets account"
-        }
-      }
     },
     {
       "parameters": {
@@ -392,7 +232,7 @@
       "typeVersion": 3.4,
       "position": [
         -64,
-        -160
+        -368
       ],
       "id": "d6c96e91-025f-46aa-9451-4b4b8c23f930",
       "name": "Edit Fields1"
@@ -405,8 +245,8 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
       "typeVersion": 1,
       "position": [
-        -120,
-        556
+        -128,
+        352
       ],
       "id": "2fb8cfb5-5d86-47bd-b5c8-8c3977be0e91",
       "name": "Google Gemini Chat Model",
@@ -414,167 +254,6 @@
         "googlePalmApi": {
           "id": "DrQvNed7ctNTDsFv",
           "name": "Google Gemini(PaLM) Api account"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "operation": "appendOrUpdate",
-        "documentId": {
-          "__rl": true,
-          "value": "19YyR8JQLbaspzTVqBjmV0mN5ByUznyc3pY_jOYZZjPU",
-          "mode": "list",
-          "cachedResultName": "Sistema Inteligente de Gestión de Justificación de Inasistencias",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/19YyR8JQLbaspzTVqBjmV0mN5ByUznyc3pY_jOYZZjPU/edit?usp=drivesdk"
-        },
-        "sheetName": {
-          "__rl": true,
-          "value": 1198437236,
-          "mode": "list",
-          "cachedResultName": "pendientes",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/19YyR8JQLbaspzTVqBjmV0mN5ByUznyc3pY_jOYZZjPU/edit#gid=1198437236"
-        },
-        "columns": {
-          "mappingMode": "defineBelow",
-          "value": {
-            "id_estudiante": "={{ $json.id }}",
-            "correo": "={{ $json.correo }}",
-            "motivo": "={{ $json.motivo }}",
-            "decision_ia": "={{ $('AI Agent').item.json.output.decision }}",
-            "razon_ia": "={{ $('AI Agent').item.json.output.razon }}",
-            "confianza_ia": "={{ $('AI Agent').item.json.output.confianza }}",
-            "fecha": "={{ $today }}",
-            "name": "={{ $json.nombre }}",
-            "fileName": "={{ $('If1').item.json.fileName }}",
-            "file_id": "={{ $('If1').item.json.fileID }}"
-          },
-          "matchingColumns": [
-            "fecha"
-          ],
-          "schema": [
-            {
-              "id": "ID",
-              "displayName": "ID",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": true
-            },
-            {
-              "id": "fecha",
-              "displayName": "fecha",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "name",
-              "displayName": "name",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "id_estudiante",
-              "displayName": "id_estudiante",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "correo",
-              "displayName": "correo",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "motivo",
-              "displayName": "motivo",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "fileName",
-              "displayName": "fileName",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "file_id",
-              "displayName": "file_id",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "decision_ia",
-              "displayName": "decision_ia",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "razon_ia",
-              "displayName": "razon_ia",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "confianza_ia",
-              "displayName": "confianza_ia",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            }
-          ],
-          "attemptToConvertTypes": false,
-          "convertFieldsToString": false
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.googleSheets",
-      "typeVersion": 4.7,
-      "position": [
-        1344,
-        128
-      ],
-      "id": "9c9d88b1-8112-4bc7-a8fa-dd9ec31c62e8",
-      "name": "Append or update row in sheet4",
-      "executeOnce": true,
-      "credentials": {
-        "googleSheetsOAuth2Api": {
-          "id": "cpakxWaQFPMyl5io",
-          "name": "Google Sheets account"
         }
       }
     },
@@ -602,7 +281,7 @@
       "typeVersion": 3,
       "position": [
         -352,
-        -160
+        -368
       ],
       "id": "39e2257f-144b-419e-ab10-afa53eada26a",
       "name": "Upload file",
@@ -622,7 +301,7 @@
       "typeVersion": 4.4,
       "position": [
         -64,
-        32
+        -176
       ],
       "id": "51b7b07b-f192-46a2-aaed-51c59ab83902",
       "name": "HTTP Request",
@@ -657,7 +336,7 @@
       "typeVersion": 2.3,
       "position": [
         672,
-        -12
+        -224
       ],
       "id": "8c74375d-c3ba-4261-9566-c2c23c50a861",
       "name": "If1"
@@ -672,7 +351,7 @@
       "typeVersion": 1.2,
       "position": [
         896,
-        128
+        -80
       ],
       "id": "906e8362-277e-4fdd-8ccd-47e0ac67607b",
       "name": "Send a text message1",
@@ -696,7 +375,7 @@
       "typeVersion": 2.2,
       "position": [
         1568,
-        -64
+        -272
       ],
       "id": "5d1e7009-812a-4694-8e89-366f8ed38f44",
       "name": "Send a message",
@@ -719,7 +398,7 @@
       "typeVersion": 3.2,
       "position": [
         224,
-        -28
+        -240
       ],
       "id": "1b0098f0-1291-4568-965c-3ab9f9132e17",
       "name": "Merge"
@@ -778,7 +457,7 @@
       "typeVersion": 3.4,
       "position": [
         448,
-        -12
+        -224
       ],
       "id": "ad63d861-260a-413e-bf99-4e0fb90bff1a",
       "name": "Edit Fields2"
@@ -795,7 +474,7 @@
       "typeVersion": 2.2,
       "position": [
         1568,
-        -256
+        -464
       ],
       "id": "13032973-66e2-403f-8268-6ca32eddf0af",
       "name": "Send a message1",
@@ -809,163 +488,6 @@
     },
     {
       "parameters": {
-        "operation": "appendOrUpdate",
-        "documentId": {
-          "__rl": true,
-          "value": "19YyR8JQLbaspzTVqBjmV0mN5ByUznyc3pY_jOYZZjPU",
-          "mode": "list",
-          "cachedResultName": "Sistema Inteligente de Gestión de Justificación de Inasistencias",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/19YyR8JQLbaspzTVqBjmV0mN5ByUznyc3pY_jOYZZjPU/edit?usp=drivesdk"
-        },
-        "sheetName": {
-          "__rl": true,
-          "value": 2017708734,
-          "mode": "list",
-          "cachedResultName": "rechazadas",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/19YyR8JQLbaspzTVqBjmV0mN5ByUznyc3pY_jOYZZjPU/edit#gid=2017708734"
-        },
-        "columns": {
-          "mappingMode": "defineBelow",
-          "value": {
-            "fecha": "={{ $today }}",
-            "name": "={{ $json.nombre }}",
-            "id_estudiante": "={{ $json.id }}",
-            "correo": "={{ $json.correo }}",
-            "motivo": "={{ $json.motivo }}",
-            "fileName": "={{ $('If1').item.json.fileName }}",
-            "file_id": "={{ $('If1').item.json.fileID }}",
-            "decision_ia": "={{ $('If1').item.json.decision }}",
-            "razon_ia": "={{ $('If1').item.json.razon }}",
-            "confianza_ia": "={{ $('If1').item.json.confianza }}"
-          },
-          "matchingColumns": [
-            "fecha"
-          ],
-          "schema": [
-            {
-              "id": "ID",
-              "displayName": "ID",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": true
-            },
-            {
-              "id": "fecha",
-              "displayName": "fecha",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "name",
-              "displayName": "name",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "id_estudiante",
-              "displayName": "id_estudiante",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "correo",
-              "displayName": "correo",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "motivo",
-              "displayName": "motivo",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "fileName",
-              "displayName": "fileName",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "file_id",
-              "displayName": "file_id",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "decision_ia",
-              "displayName": "decision_ia",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "razon_ia",
-              "displayName": "razon_ia",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "confianza_ia",
-              "displayName": "confianza_ia",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            }
-          ],
-          "attemptToConvertTypes": false,
-          "convertFieldsToString": false
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.googleSheets",
-      "typeVersion": 4.7,
-      "position": [
-        1344,
-        -256
-      ],
-      "id": "cb5bc172-866e-4068-85dc-f072e71c26c3",
-      "name": "Append or update row in sheet1",
-      "credentials": {
-        "googleSheetsOAuth2Api": {
-          "id": "cpakxWaQFPMyl5io",
-          "name": "Google Sheets account"
-        }
-      }
-    },
-    {
-      "parameters": {
         "chatId": "7534740046",
         "text": "=Hola,\n\nSe ha recibido una nueva solicitud de justificación de inasistencia que requiere tu revisión 🧐.\n\nEl sistema no pudo determinar con certeza su validez, por lo que es necesario que evalúes el archivo adjunto y definas cómo proceder.\n\nInformación del caso:\n\nNombre: {{ $json.name }}\nID: {{ $json.id_estudiante }}\nCorreo: {{ $json.correo }}\n\nPor favor, revisa el documento y toma la decisión correspondiente a la mayor brevedad posible.\n\nQuedamos atentos a tu gestión.\n\nSaludos,\nSistema de Gestión de Inasistencias",
         "additionalFields": {}
@@ -974,7 +496,7 @@
       "typeVersion": 1.2,
       "position": [
         1568,
-        128
+        -80
       ],
       "id": "b7c54a3f-d7da-4c85-b474-91a77ebb9729",
       "name": "Send a text message2",
@@ -996,7 +518,7 @@
       "typeVersion": 2.1,
       "position": [
         -576,
-        756
+        560
       ],
       "id": "662e4968-2b2f-4ae6-b924-fa39b721e09d",
       "name": "Webhook1",
@@ -1032,7 +554,7 @@
       "typeVersion": 3.4,
       "position": [
         -352,
-        756
+        560
       ],
       "id": "661eaeba-0a30-46c2-95ea-9d25228273f7",
       "name": "Edit Fields3"
@@ -1060,7 +582,7 @@
       "typeVersion": 4.7,
       "position": [
         96,
-        756
+        560
       ],
       "id": "e40a4584-4c84-410e-923c-33d367ac6b05",
       "name": "Delete rows or columns from sheet",
@@ -1101,7 +623,7 @@
       "typeVersion": 4.7,
       "position": [
         -128,
-        756
+        560
       ],
       "id": "aeadb9a6-96e3-4680-b342-4f61b30f3f8b",
       "name": "Get row(s) in sheet",
@@ -1140,7 +662,7 @@
       "typeVersion": 2.3,
       "position": [
         320,
-        756
+        560
       ],
       "id": "e82d30e5-f95f-4ec3-bf04-92ba3575841c",
       "name": "If"
@@ -1291,7 +813,7 @@
       "typeVersion": 4.7,
       "position": [
         544,
-        660
+        464
       ],
       "id": "f27f90a4-79ec-469b-bfa5-191c4ddf1a64",
       "name": "Append or update row in sheet2",
@@ -1448,7 +970,7 @@
       "typeVersion": 4.7,
       "position": [
         544,
-        852
+        656
       ],
       "id": "42eb313f-92bf-4622-a1b7-fd01ef188587",
       "name": "Append or update row in sheet3",
@@ -1471,7 +993,7 @@
       "typeVersion": 1.2,
       "position": [
         -576,
-        -576
+        -784
       ],
       "id": "ded58b4c-9582-4ac0-ad49-def72ac23358",
       "name": "Telegram Trigger",
@@ -1516,7 +1038,7 @@
       "typeVersion": 1.2,
       "position": [
         -128,
-        -480
+        -688
       ],
       "id": "dbe89039-f8ff-45ea-aa6f-dfb4706a8fdb",
       "name": "Send a text message3",
@@ -1530,94 +1052,9 @@
     },
     {
       "parameters": {
-        "rules": {
-          "values": [
-            {
-              "conditions": {
-                "options": {
-                  "caseSensitive": true,
-                  "leftValue": "",
-                  "typeValidation": "strict",
-                  "version": 3
-                },
-                "conditions": [
-                  {
-                    "leftValue": "={{ $json.callback_query.data }}",
-                    "rightValue": "a",
-                    "operator": {
-                      "type": "string",
-                      "operation": "equals"
-                    },
-                    "id": "ae440e58-a590-4528-8e9b-1c089c791013"
-                  }
-                ],
-                "combinator": "and"
-              }
-            },
-            {
-              "conditions": {
-                "options": {
-                  "caseSensitive": true,
-                  "leftValue": "",
-                  "typeValidation": "strict",
-                  "version": 3
-                },
-                "conditions": [
-                  {
-                    "id": "16fe32d8-31ec-49d3-9fdc-0b7bfa13ad5e",
-                    "leftValue": "={{ $json.callback_query.data }}",
-                    "rightValue": "b",
-                    "operator": {
-                      "type": "string",
-                      "operation": "equals"
-                    }
-                  }
-                ],
-                "combinator": "and"
-              }
-            }
-          ]
-        },
-        "options": {
-          "fallbackOutput": "extra"
-        }
-      },
-      "type": "n8n-nodes-base.switch",
-      "typeVersion": 3.4,
-      "position": [
-        -352,
-        -592
-      ],
-      "id": "64e2c91f-6a60-43c7-9a2a-b3de26306f3e",
-      "name": "Switch1"
-    },
-    {
-      "parameters": {
-        "chatId": "7534740046",
-        "text": "erroe en la respuesta de la ia, requiere revision!!",
-        "additionalFields": {}
-      },
-      "type": "n8n-nodes-base.telegram",
-      "typeVersion": 1.2,
-      "position": [
-        -128,
-        -672
-      ],
-      "id": "51477c0a-040f-4b18-aa41-f7c117e937ca",
-      "name": "Send a text message5",
-      "webhookId": "a175449c-f10f-488c-92be-2dd81f5274ff",
-      "credentials": {
-        "telegramApi": {
-          "id": "cg7huuESesO641Wn",
-          "name": "Telegram account"
-        }
-      }
-    },
-    {
-      "parameters": {
         "operation": "sendAndWait",
         "chatId": "7534740046",
-        "message": "📋 *Revisión de solicitudes por estudiante*\n\nHas seleccionado esta opción para consultar las solicitudes de un estudiante 👨‍🎓\n\n🔍 *¿Qué debes hacer ahora?*\nIngresa el **ID del estudiante** que deseas consultar.\n\n📌 Asegúrate de escribirlo correctamente para poder encontrar la información.\n\nCuando lo envíes, te mostraré todas las solicitudes registradas 📄",
+        "message": "digite el id de estudiante",
         "responseType": "freeText",
         "options": {}
       },
@@ -1625,7 +1062,7 @@
       "typeVersion": 1.2,
       "position": [
         -128,
-        -864
+        -880
       ],
       "id": "997abf51-2fc4-44f4-8151-3b06e079f82e",
       "name": "Send message and wait for response",
@@ -1655,7 +1092,7 @@
       "typeVersion": 3.4,
       "position": [
         96,
-        -864
+        -880
       ],
       "id": "ea8576f3-ef41-4bb8-9cbc-0d8de10da8c8",
       "name": "Edit Fields4"
@@ -1690,7 +1127,7 @@
       "typeVersion": 4.7,
       "position": [
         320,
-        -960
+        -1072
       ],
       "id": "a870c46b-2b8f-4c3c-a4a0-6c339eb3c299",
       "name": "Get row(s) in sheet1",
@@ -1732,7 +1169,7 @@
       "typeVersion": 4.7,
       "position": [
         320,
-        -768
+        -880
       ],
       "id": "5441e407-c037-41ea-8425-12b72104b609",
       "name": "Get row(s) in sheet2",
@@ -1774,7 +1211,7 @@
       "typeVersion": 4.7,
       "position": [
         320,
-        -576
+        -688
       ],
       "id": "d82200dd-d5c3-4062-91b4-8f6806df980f",
       "name": "Get row(s) in sheet3",
@@ -1794,7 +1231,7 @@
       "typeVersion": 3.2,
       "position": [
         544,
-        -784
+        -992
       ],
       "id": "c2a23112-c7d6-41c8-aef9-7d1960d35d1a",
       "name": "Merge1"
@@ -1808,8 +1245,8 @@
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        768,
-        -768
+        1216,
+        -784
       ],
       "id": "501a4f26-fa0a-444e-9c26-48123343c19b",
       "name": "Send a text message6",
@@ -1818,6 +1255,600 @@
         "telegramApi": {
           "id": "cg7huuESesO641Wn",
           "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "e7935637-c75c-43fb-a8ff-a84d8b14e6b4",
+              "leftValue": "={{ $json.callback_query.data }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "exists",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -352,
+        -784
+      ],
+      "id": "ceeec47e-5ae0-4b9a-8230-c18ce9419f3f",
+      "name": "If2"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Ordenar por fecha descendente\nitems.sort((a, b) => {\n  return new Date(b.json.fecha) - new Date(a.json.fecha);\n});\n\n// Tomar los primeros 5\nreturn items;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        768,
+        -976
+      ],
+      "id": "5b4d4d9b-31b6-4604-8d35-394652715eec",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "maxItems": 5
+      },
+      "type": "n8n-nodes-base.limit",
+      "typeVersion": 1,
+      "position": [
+        1216,
+        -976
+      ],
+      "id": "cc52d6a7-1d63-4249-b492-3633e8163531",
+      "name": "Limit"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "5968c33d-c3b7-494f-bd52-ea384da59bf2",
+              "leftValue": "={{ $('Telegram Trigger').item.json.callback_query.data }}",
+              "rightValue": "a",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        992,
+        -976
+      ],
+      "id": "67bc7524-49a0-4959-87de-eaf8cab32300",
+      "name": "If4"
+    },
+    {
+      "parameters": {
+        "chatId": "7534740046",
+        "text": "=📌 Solicitud encontrada\n\n👨‍🎓 Estudiante: {{ $json.name }}\n🆔 ID estudiante: {{ $json.id_estudiante }}\n\n🆔 ID solicitud: {{ $json.ID }}\n📅 Fecha: {{ $json.fecha }}\n📝 Motivo: {{ $json.motivo }}\n📎 Archivo: {{\"https://drive.google.com/file/d/\" + $json[\"file_id\"] + \"/view\"}}\n📌 Estado: {{ $json.decision_ia }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        1440,
+        -976
+      ],
+      "id": "8a33291a-c4dc-4bfb-90a4-086cf4ec499d",
+      "name": "Send a text message7",
+      "webhookId": "a175449c-f10f-488c-92be-2dd81f5274ff",
+      "credentials": {
+        "telegramApi": {
+          "id": "cg7huuESesO641Wn",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "19YyR8JQLbaspzTVqBjmV0mN5ByUznyc3pY_jOYZZjPU",
+          "mode": "list",
+          "cachedResultName": "Sistema Inteligente de Gestión de Justificación de Inasistencias",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/19YyR8JQLbaspzTVqBjmV0mN5ByUznyc3pY_jOYZZjPU/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 2017708734,
+          "mode": "list",
+          "cachedResultName": "rechazadas",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/19YyR8JQLbaspzTVqBjmV0mN5ByUznyc3pY_jOYZZjPU/edit#gid=2017708734"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "fecha": "={{ $today }}",
+            "name": "={{ $json.nombre }}",
+            "id_estudiante": "={{ $json.id }}",
+            "correo": "={{ $json.correo }}",
+            "motivo": "={{ $json.motivo }}",
+            "fileName": "={{ $('If1').item.json.fileName }}",
+            "file_id": "={{ $('If1').item.json.fileID }}",
+            "decision_ia": "={{ $('If1').item.json.decision }}",
+            "razon_ia": "={{ $('If1').item.json.razon }}",
+            "confianza_ia": "={{ $('If1').item.json.confianza }}"
+          },
+          "matchingColumns": [
+            "fecha"
+          ],
+          "schema": [
+            {
+              "id": "ID",
+              "displayName": "ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "fecha",
+              "displayName": "fecha",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "name",
+              "displayName": "name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "id_estudiante",
+              "displayName": "id_estudiante",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "correo",
+              "displayName": "correo",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "motivo",
+              "displayName": "motivo",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "fileName",
+              "displayName": "fileName",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "file_id",
+              "displayName": "file_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "decision_ia",
+              "displayName": "decision_ia",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "razon_ia",
+              "displayName": "razon_ia",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "confianza_ia",
+              "displayName": "confianza_ia",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        1344,
+        -464
+      ],
+      "id": "cb5bc172-866e-4068-85dc-f072e71c26c3",
+      "name": "Append row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "cpakxWaQFPMyl5io",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "19YyR8JQLbaspzTVqBjmV0mN5ByUznyc3pY_jOYZZjPU",
+          "mode": "list",
+          "cachedResultName": "Sistema Inteligente de Gestión de Justificación de Inasistencias",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/19YyR8JQLbaspzTVqBjmV0mN5ByUznyc3pY_jOYZZjPU/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "aprobadas",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/19YyR8JQLbaspzTVqBjmV0mN5ByUznyc3pY_jOYZZjPU/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "fecha": "={{ $today }}",
+            "name": "={{ $json.nombre }}",
+            "id_estudiante": "={{ $json.id }}",
+            "correo": "={{ $json.correo }}",
+            "motivo": "={{ $json.motivo }}",
+            "fileName": "={{ $('If1').item.json.fileName }}",
+            "decision_ia": "={{ $('If1').item.json.decision }}",
+            "razon_ia": "={{ $('If1').item.json.razon }}",
+            "confianza_ia": "={{ $('If1').item.json.confianza }}",
+            "file_id": "={{ $('If1').item.json.fileID }}"
+          },
+          "matchingColumns": [
+            "fecha"
+          ],
+          "schema": [
+            {
+              "id": "ID",
+              "displayName": "ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "fecha",
+              "displayName": "fecha",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "name",
+              "displayName": "name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "id_estudiante",
+              "displayName": "id_estudiante",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "correo",
+              "displayName": "correo",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "motivo",
+              "displayName": "motivo",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "fileName",
+              "displayName": "fileName",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "file_id",
+              "displayName": "file_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "decision_ia",
+              "displayName": "decision_ia",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "razon_ia",
+              "displayName": "razon_ia",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "confianza_ia",
+              "displayName": "confianza_ia",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        1344,
+        -272
+      ],
+      "id": "384cce09-c94d-4b53-b7d7-ea23bb843b22",
+      "name": "Append row in sheet1",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "cpakxWaQFPMyl5io",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "19YyR8JQLbaspzTVqBjmV0mN5ByUznyc3pY_jOYZZjPU",
+          "mode": "list",
+          "cachedResultName": "Sistema Inteligente de Gestión de Justificación de Inasistencias",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/19YyR8JQLbaspzTVqBjmV0mN5ByUznyc3pY_jOYZZjPU/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1198437236,
+          "mode": "list",
+          "cachedResultName": "pendientes",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/19YyR8JQLbaspzTVqBjmV0mN5ByUznyc3pY_jOYZZjPU/edit#gid=1198437236"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "id_estudiante": "={{ $json.id }}",
+            "correo": "={{ $json.correo }}",
+            "motivo": "={{ $json.motivo }}",
+            "decision_ia": "={{ $('AI Agent').item.json.output.decision }}",
+            "razon_ia": "={{ $('AI Agent').item.json.output.razon }}",
+            "confianza_ia": "={{ $('AI Agent').item.json.output.confianza }}",
+            "fecha": "={{ $today }}",
+            "name": "={{ $json.nombre }}",
+            "fileName": "={{ $('If1').item.json.fileName }}",
+            "file_id": "={{ $('If1').item.json.fileID }}"
+          },
+          "matchingColumns": [
+            "fecha"
+          ],
+          "schema": [
+            {
+              "id": "ID",
+              "displayName": "ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "fecha",
+              "displayName": "fecha",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "name",
+              "displayName": "name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "id_estudiante",
+              "displayName": "id_estudiante",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "correo",
+              "displayName": "correo",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "motivo",
+              "displayName": "motivo",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "fileName",
+              "displayName": "fileName",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "file_id",
+              "displayName": "file_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "decision_ia",
+              "displayName": "decision_ia",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "razon_ia",
+              "displayName": "razon_ia",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "confianza_ia",
+              "displayName": "confianza_ia",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        1344,
+        -80
+      ],
+      "id": "9c9d88b1-8112-4bc7-a8fa-dd9ec31c62e8",
+      "name": "Append row in sheet2",
+      "executeOnce": true,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "cpakxWaQFPMyl5io",
+          "name": "Google Sheets account"
         }
       }
     }
@@ -1870,21 +1901,21 @@
       "main": [
         [
           {
-            "node": "Append or update row in sheet1",
+            "node": "Append row in sheet",
             "type": "main",
             "index": 0
           }
         ],
         [
           {
-            "node": "Append or update row in sheet",
+            "node": "Append row in sheet1",
             "type": "main",
             "index": 0
           }
         ],
         [
           {
-            "node": "Append or update row in sheet4",
+            "node": "Append row in sheet2",
             "type": "main",
             "index": 0
           }
@@ -1909,17 +1940,6 @@
         ]
       ]
     },
-    "Append or update row in sheet": {
-      "main": [
-        [
-          {
-            "node": "Send a message",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Edit Fields1": {
       "main": [
         [
@@ -1937,17 +1957,6 @@
           {
             "node": "AI Agent",
             "type": "ai_languageModel",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Append or update row in sheet4": {
-      "main": [
-        [
-          {
-            "node": "Send a text message2",
-            "type": "main",
             "index": 0
           }
         ]
@@ -2010,17 +2019,6 @@
         [
           {
             "node": "If1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Append or update row in sheet1": {
-      "main": [
-        [
-          {
-            "node": "Send a message1",
             "type": "main",
             "index": 0
           }
@@ -2093,32 +2091,7 @@
       "main": [
         [
           {
-            "node": "Switch1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Switch1": {
-      "main": [
-        [
-          {
-            "node": "Send message and wait for response",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "Send a text message5",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "Send a text message3",
+            "node": "If2",
             "type": "main",
             "index": 0
           }
@@ -2194,7 +2167,103 @@
       "main": [
         [
           {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a text message6": {
+      "main": [
+        []
+      ]
+    },
+    "If2": {
+      "main": [
+        [
+          {
+            "node": "Send message and wait for response",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Send a text message3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "If4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Limit": {
+      "main": [
+        [
+          {
+            "node": "Send a text message7",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If4": {
+      "main": [
+        [
+          {
+            "node": "Limit",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
             "node": "Send a text message6",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append row in sheet": {
+      "main": [
+        [
+          {
+            "node": "Send a message1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append row in sheet1": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append row in sheet2": {
+      "main": [
+        [
+          {
+            "node": "Send a text message2",
             "type": "main",
             "index": 0
           }
