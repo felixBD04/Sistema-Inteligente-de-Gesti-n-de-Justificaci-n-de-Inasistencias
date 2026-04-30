@@ -2,66 +2,167 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Formulario de Inasistencia</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Justificación de Inasistencia</title>
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/formulario.css">
 </head>
 <body>
 
-  <h2>Justificación de Inasistencia</h2>
+  <!-- ── Navbar ───────────────────────────────────────── -->
+  <nav class="navbar">
+    <a class="navbar-brand" href="index.html">
+      <div class="brand-icon">📋</div>
+      <div>
+        <div class="brand-text">Sistema de Inasistencias</div>
+        <div class="brand-sub">Campus Lands</div>
+      </div>
+    </a>
 
-  <form id="formulario">
+    <ul class="navbar-nav">
+      <li>
+        <a href="index.html" class="active">
+          ✏️ Formulario
+        </a>
+      </li>
+      <li>
+        <a href="prueba_pagina_pendientes.html">
+          📊 Panel de revisión
+          <span class="nav-badge">ADMIN</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
 
-    <label>Nombre:</label><br>
-    <input type="text" name="nombre" required><br><br>
+  <!-- ── Contenido ────────────────────────────────────── -->
+  <main class="page-wrapper">
 
-    <label>ID:</label><br>
-    <input type="text" name="id" required><br><br>
+    <div class="page-header">
+      <span class="tag">Estudiante</span>
+      <h1>Justificación de Inasistencia</h1>
+      <p>Completa el formulario para registrar tu solicitud. Adjunta el documento de soporte para que sea procesada.</p>
+    </div>
 
-    <label>Correo:</label><br>
-    <input type="email" name="correo" required><br><br>
+    <!-- Indicador de pasos -->
+    <div class="steps">
+      <div class="step active">
+        <div class="step-dot">1</div>
+        <span class="step-label">Datos personales</span>
+      </div>
+      <div class="step">
+        <div class="step-dot">2</div>
+        <span class="step-label">Motivo y soporte</span>
+      </div>
+      <div class="step">
+        <div class="step-dot">3</div>
+        <span class="step-label">Enviado</span>
+      </div>
+    </div>
 
-    <label>Motivo:</label><br>
-    <select name="motivo" required>
-      <option value="">Selecciona uno</option>
-      <option value="enfermedad">Enfermedad</option>
-      <option value="problema_familiar">Problema familiar</option>
-      <option value="cita_medica">Cita médica</option>
-      <option value="otro">Otro</option>
-    </select><br><br>
+    <!-- Card del formulario -->
+    <div class="card">
+      <form id="formulario" novalidate>
 
-    <label>Documento de soporte:</label><br>
-    <input type="file" name="archivo" required><br><br>
+        <div class="form-grid">
 
-    <button type="submit">Enviar</button>
+          <!-- Nombre -->
+          <div class="form-group">
+            <label class="form-label" for="nombre">
+              Nombre completo <span class="req">*</span>
+            </label>
+            <input
+              class="form-input"
+              type="text"
+              id="nombre"
+              name="nombre"
+              placeholder="Ej. Juan Díaz"
+              required
+            >
+          </div>
 
-  </form>
+          <!-- ID -->
+          <div class="form-group">
+            <label class="form-label" for="id">
+              ID de estudiante <span class="req">*</span>
+            </label>
+            <input
+              class="form-input"
+              type="text"
+              id="id"
+              name="id"
+              placeholder="Ej. 2024001"
+              required
+            >
+          </div>
 
-  <script>
-    const form = document.getElementById("formulario");
+          <!-- Correo -->
+          <div class="form-group full">
+            <label class="form-label" for="correo">
+              Correo electrónico <span class="req">*</span>
+            </label>
+            <input
+              class="form-input"
+              type="email"
+              id="correo"
+              name="correo"
+              placeholder="ejemplo@campuslands.com"
+              required
+            >
+          </div>
 
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault();
+          <!-- Motivo -->
+          <div class="form-group full">
+            <label class="form-label" for="motivo">
+              Motivo de inasistencia <span class="req">*</span>
+            </label>
+            <select class="form-select" id="motivo" name="motivo" required>
+              <option value="">Selecciona un motivo</option>
+              <option value="enfermedad">🤒 Enfermedad</option>
+              <option value="problema_familiar">👨‍👩‍👧 Problema familiar</option>
+              <option value="cita_medica">🏥 Cita médica</option>
+              <option value="otro">📌 Otro</option>
+            </select>
+          </div>
 
-      const formData = new FormData(form);
+          <!-- Archivo -->
+          <div class="form-group full">
+            <label class="form-label">
+              Documento de soporte <span class="req">*</span>
+            </label>
+            <div class="file-upload-area">
+              <input type="file" id="archivo" name="archivo" required accept=".pdf,.jpg,.jpeg,.png,.doc,.docx">
+              <span class="file-upload-icon">📂</span>
+              <div class="file-upload-text">
+                <strong>Haz clic o arrastra aquí</strong> tu archivo<br>
+                PDF, imagen o documento (máx. 10 MB)
+              </div>
+            </div>
+            <span class="file-name" id="file-name"></span>
+          </div>
 
-      try {
-        const response = await fetch("https://felix04.app.n8n.cloud/webhook-test/Sistema_Inteligente_de_Gestión_de_Justificación_de_Inasistencias", {
-          method: "POST",
-          body: formData
-        });
+        </div><!-- /form-grid -->
 
-        if (response.ok) {
-          alert("Datos enviados correctamente 🚀");
-          //form.reset();
-        } else {
-          alert("Error al enviar");
-        }
+        <div class="divider"></div>
 
-      } catch (error) {
-        console.error(error);
-        alert("Error de conexión");
-      }
-    });
-  </script>
+        <div class="form-actions">
+          <button type="reset" class="btn btn-outline" onclick="location.reload()">
+            Limpiar
+          </button>
+          <button type="submit" class="btn btn-primary btn-submit" id="btn-enviar">
+            <div class="spinner" id="spinner"></div>
+            <span class="btn-text">Enviar justificación</span>
+          </button>
+        </div>
 
+      </form>
+    </div><!-- /card -->
+
+  </main>
+
+  <!-- Toast -->
+  <div class="toast" id="toast"></div>
+
+  <script src="js/utils.js"></script>
+  <script src="js/formulario.js"></script>
 </body>
 </html>
