@@ -8,8 +8,6 @@
   <link rel="stylesheet" href="css/pendientes.css">
 </head>
 <body>
-
-  <!-- ── Navbar ───────────────────────────────────────────── -->
   <nav class="navbar">
     <a class="navbar-brand" href="index.html">
       <div class="brand-icon">✦</div>
@@ -18,65 +16,42 @@
         <div class="brand-sub">Campus Lands</div>
       </div>
     </a>
-
     <ul class="navbar-nav">
-      <li>
-        <a href="index.html">
-          Formulario
-        </a>
-      </li>
-      <li>
-        <a href="prueba_pagina_pendientes.html" class="active">
-          Panel de revisión
-          <span class="nav-badge">ADMIN</span>
-        </a>
-      </li>
+      <li><a href="index.html">Formulario</a></li>
+      <li><a href="prueba_pagina_pendientes.html" class="active">Panel de revisión <span class="nav-badge">ADMIN</span></a></li>
     </ul>
   </nav>
 
-  <!-- ── Contenido ────────────────────────────────────────── -->
   <main class="page-wrapper">
-
     <div class="page-header">
       <span class="tag">Administrador</span>
-      <h1>Solicitudes <em>Pendientes</em></h1>
-      <p>Revisa cada justificación, consulta el documento de soporte y aprueba o rechaza la solicitud.</p>
+      <h1>Centro de control <em>de solicitudes</em></h1>
+      <p>Vista avanzada para analizar solicitudes con más contexto: motivo, fecha de envío y razón detallada escrita por el estudiante.</p>
     </div>
 
-    <!-- Stats -->
     <div class="stats-row">
-      <div class="stat-card accent">
-        <div class="stat-value" id="stat-total">—</div>
-        <div class="stat-label">Total solicitudes</div>
-      </div>
-      <div class="stat-card warning">
-        <div class="stat-value" id="stat-pendientes">—</div>
-        <div class="stat-label">Pendientes de revisión</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-value" id="stat-files">—</div>
-        <div class="stat-label">Con documento adjunto</div>
-      </div>
+      <div class="stat-card accent"><div class="stat-value" id="stat-total">—</div><div class="stat-label">Total solicitudes</div></div>
+      <div class="stat-card warning"><div class="stat-value" id="stat-pendientes">—</div><div class="stat-label">Pendientes de revisión</div></div>
+      <div class="stat-card"><div class="stat-value" id="stat-files">—</div><div class="stat-label">Con documento adjunto</div></div>
     </div>
 
-    <!-- Tabla -->
     <div class="table-wrapper">
       <div class="table-header">
-        <span class="table-title">Listado de solicitudes</span>
+        <span class="table-title">Solicitudes pendientes</span>
         <div class="table-search">
           <span class="search-icon">⌕</span>
-          <input type="text" id="search-input" placeholder="Buscar por nombre o correo…">
+          <input type="text" id="search-input" placeholder="Buscar por nombre, correo o motivo…">
         </div>
-        <button class="btn btn-outline btn-refresh" id="btn-refresh">
-          Actualizar
-        </button>
+        <button class="btn btn-outline btn-refresh" id="btn-refresh">Actualizar</button>
       </div>
-
       <table class="data-table">
         <thead>
           <tr>
             <th>Estudiante</th>
             <th>Correo</th>
+            <th>Motivo</th>
+            <th>Razón detallada IA</th>
+            <th>Fecha</th>
             <th>Soporte</th>
             <th>Estado</th>
             <th>Decisión</th>
@@ -84,20 +59,14 @@
         </thead>
         <tbody id="tabla-body">
           <tr>
-            <td colspan="5" class="table-loading">
-              <div class="loader"></div>
-              Cargando solicitudes...
-            </td>
+            <td colspan="8" class="table-loading"><div class="loader"></div>Cargando solicitudes...</td>
           </tr>
         </tbody>
       </table>
-    </div><!-- /table-wrapper -->
-
+    </div>
   </main>
 
-  <!-- Toast -->
   <div class="toast" id="toast"></div>
-
   <script src="js/utils.js"></script>
   <script src="js/pendientes.js"></script>
 </body>
