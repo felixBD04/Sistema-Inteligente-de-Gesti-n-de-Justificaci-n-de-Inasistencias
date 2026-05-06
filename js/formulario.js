@@ -3,7 +3,7 @@
    ============================================================ */
 
 const WEBHOOK_URL =
-  "https://felix04.app.n8n.cloud/webhook/Sistema_Inteligente_de_Gestión_de_Justificación_de_Inasistencias";
+  "https://juan3491.app.n8n.cloud/webhook-test/Sistema_Inteligente_de_Gestión_de_Justificación_de_Inasistencias";
 
 document.addEventListener('DOMContentLoaded', () => {
   const form     = document.getElementById('formulario');

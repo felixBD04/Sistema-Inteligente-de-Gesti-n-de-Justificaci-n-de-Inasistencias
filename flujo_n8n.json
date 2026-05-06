@@ -9,24 +9,24 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2.1,
       "position": [
-        -576,
-        -128
+        -1296,
+        896
       ],
-      "id": "65559bb2-fc17-47a4-8ee1-45a983174a6e",
+      "id": "32e9fa9f-39d1-4d5b-b8a6-320bf237d405",
       "name": "Webhook",
       "webhookId": "c8ff7e40-1c43-4287-acd3-03241d53f77a"
     },
     {
       "parameters": {
-        "jsonSchemaExample": "{\n  \"decision\": \"VALIDA\",\n  \"razon\": \"...\",\n  \"confianza\": 70\n}"
+        "jsonSchemaExample": "{\n  \"decision\": \"VALIDA\",\n  \"razon\": \"explicación breve\",\n  \"confianza\": \"60%\",\n  \"prioridad\": \"ALTA\"\n}"
       },
       "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
       "typeVersion": 1.3,
       "position": [
-        16,
-        352
+        184,
+        1532
       ],
-      "id": "907d6ca0-5ccf-4c48-9a4c-f05bfdd75bf4",
+      "id": "7a677010-1e0d-49c6-960b-f164df7bb5c7",
       "name": "Structured Output Parser"
     },
     {
@@ -70,10 +70,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        896,
-        -272
+        1072,
+        848
       ],
-      "id": "d601116e-2df1-4b1c-b8f5-07ebacd96641",
+      "id": "ffc71e7e-cf39-4434-af17-8a33d42086cb",
       "name": "Edit Fields"
     },
     {
@@ -153,10 +153,10 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.4,
       "position": [
-        1120,
-        -288
+        1296,
+        832
       ],
-      "id": "eca73073-6602-485a-ad2b-93b744e58df0",
+      "id": "a92faa1b-c6b9-4dca-ab1b-8dc0de691907",
       "name": "Switch"
     },
     {
@@ -168,15 +168,15 @@
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        224,
-        128
+        400,
+        1356
       ],
-      "id": "c96cae4c-48f4-466d-99cf-d7b5899e183c",
+      "id": "903ef6cb-4902-4d6c-9475-0eb032af44bf",
       "name": "Send a text message",
       "webhookId": "a175449c-f10f-488c-92be-2dd81f5274ff",
       "credentials": {
         "telegramApi": {
-          "id": "cg7huuESesO641Wn",
+          "id": "LHvh9ydZCFvFinUQ",
           "name": "Telegram account"
         }
       }
@@ -184,17 +184,17 @@
     {
       "parameters": {
         "promptType": "define",
-        "text": "=Analiza este documento como una justificación de inasistencia estudiantil.\n\nDatos del estudiante:\nNombre: {{ $json.body.nombre }}\nID: {{ $json.body.id }}\nCorreo: {{ $json.body.correo }}\nMotivo: {{ $json.body.motivo }}\n\nTarea:\n1. Determina si el documento parece real y coherente.\n2. Verifica si el contenido coincide con el motivo.\n3. Detecta inconsistencias o señales de falsedad.\n\nClasifica en una de estas opciones:\n- VALIDA\n- INVALIDA\n- REQUIERE_REVISION\n\nReglas:\n- Si no estás seguro → REQUIERE_REVISION\n- No inventes información\n- Sé breve y claro\n\nResponde únicamente con un JSON válido, sin texto adicional, sin explicaciones, sin saltos antes o después.\nResponde SOLO en formato JSON:\n\n{\n  \"decision\": \"VALIDA | INVALIDA | REQUIERE_REVISION\",\n  \"razon\": \"explicación breve\",\n  \"confianza\": \"porcentaje con nivel de confianza del comprovante dado\"\n}",
+        "text": "=Analiza este documento como una justificación de inasistencia estudiantil.\n\nDatos del estudiante:\nNombre: {{ $json.body.nombre }}\nID: {{ $json.body.id }}\nCorreo: {{ $json.body.correo }}\nMotivo: {{ $json.body.motivo }}\nRechazos previos: {{ $json.rechazosPrevios }}\n\nTarea:\n1. Determina si el documento parece real y coherente.\n2. Verifica si el contenido coincide con el motivo.\n3. Detecta inconsistencias o señales de falsedad.\n4. Sugiere un nivel de prioridad según el motivo.\n5. Considera el historial del estudiante:\n   - Si tiene múltiples rechazos previos, sé más estricto en la evaluación.\n   - Detecta posibles patrones sospechosos.\n\nClasificación de prioridad:\n- ALTA: hospital, urgencia, cirugía.\n- MEDIA: médico, salud.\n- BAJA: otros casos.\n\nClasifica en una de estas opciones:\n- VALIDA\n- INVALIDA\n- REQUIERE_REVISION\n\nReglas:\n- Si no estás seguro → REQUIERE_REVISION\n- No inventes información\n- Sé breve y claro\n\nResponde únicamente con un JSON válido, sin texto adicional.\n\nFormato:\n\n{\n  \"decision\": \"VALIDA | INVALIDA | REQUIERE_REVISION\",\n  \"razon\": \"explicación breve\",\n  \"confianza\": \"porcentaje de confianza\",\n  \"prioridad\": \"ALTA | MEDIA | BAJA\"\n}",
         "hasOutputParser": true,
         "options": {}
       },
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 3.1,
       "position": [
-        -128,
-        128
+        48,
+        1308
       ],
-      "id": "6012fdf4-4e81-4840-932a-e73b2a73c81c",
+      "id": "8600168f-38b2-4887-a461-351056f68a06",
       "name": "AI Agent",
       "alwaysOutputData": false,
       "retryOnFail": true,
@@ -231,31 +231,11 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -64,
-        -368
+        112,
+        656
       ],
-      "id": "d6c96e91-025f-46aa-9451-4b4b8c23f930",
+      "id": "ed2f0c18-af0c-4d5e-a5f5-d49fcf52bbcc",
       "name": "Edit Fields1"
-    },
-    {
-      "parameters": {
-        "modelName": "models/gemini-3.1-flash-lite-preview",
-        "options": {}
-      },
-      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
-      "typeVersion": 1,
-      "position": [
-        -128,
-        352
-      ],
-      "id": "2fb8cfb5-5d86-47bd-b5c8-8c3977be0e91",
-      "name": "Google Gemini Chat Model",
-      "credentials": {
-        "googlePalmApi": {
-          "id": "DrQvNed7ctNTDsFv",
-          "name": "Google Gemini(PaLM) Api account"
-        }
-      }
     },
     {
       "parameters": {
@@ -280,30 +260,30 @@
       "type": "n8n-nodes-base.googleDrive",
       "typeVersion": 3,
       "position": [
-        -352,
-        -368
+        -176,
+        656
       ],
-      "id": "39e2257f-144b-419e-ab10-afa53eada26a",
+      "id": "1d51d438-0ca1-4814-b0eb-614740a1ac0b",
       "name": "Upload file",
       "credentials": {
         "googleDriveOAuth2Api": {
-          "id": "6KaIikY3O69y2FsH",
+          "id": "hpfsSeu0a985XYPK",
           "name": "Google Drive account"
         }
       }
     },
     {
       "parameters": {
-        "url": "=https://emailreputation.abstractapi.com/v1/?api_key=27b367b299394fd1b17f18cda5f3c4ee&email={{ $json.body.correo }}",
+        "url": "=https://emailreputation.abstractapi.com/v1/?api_key=27b367b299394fd1b17f18cda5f3c4ee&email={{ $json.correo }}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        -64,
-        -176
+        112,
+        848
       ],
-      "id": "51b7b07b-f192-46a2-aaed-51c59ab83902",
+      "id": "16c8fc18-9283-44ee-bd4d-34a8899e588c",
       "name": "HTTP Request",
       "alwaysOutputData": true,
       "executeOnce": true
@@ -335,10 +315,10 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        672,
-        -224
+        848,
+        848
       ],
-      "id": "8c74375d-c3ba-4261-9566-c2c23c50a861",
+      "id": "d2434dc8-4449-4f0d-843c-550b636d5de7",
       "name": "If1"
     },
     {
@@ -350,15 +330,15 @@
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        896,
-        -80
+        1072,
+        1040
       ],
-      "id": "906e8362-277e-4fdd-8ccd-47e0ac67607b",
+      "id": "9d84947f-6202-46c7-b8dc-4e4b55ea05f3",
       "name": "Send a text message1",
       "webhookId": "a175449c-f10f-488c-92be-2dd81f5274ff",
       "credentials": {
         "telegramApi": {
-          "id": "cg7huuESesO641Wn",
+          "id": "LHvh9ydZCFvFinUQ",
           "name": "Telegram account"
         }
       }
@@ -374,16 +354,16 @@
       "type": "n8n-nodes-base.gmail",
       "typeVersion": 2.2,
       "position": [
-        1568,
-        -272
+        1744,
+        944
       ],
-      "id": "5d1e7009-812a-4694-8e89-366f8ed38f44",
+      "id": "9bb054e1-c354-458c-9e83-cc53c9fc5db6",
       "name": "Send a message",
       "webhookId": "d5b45727-c758-481a-923e-e819cea036cd",
       "credentials": {
         "gmailOAuth2": {
-          "id": "a71U1aO8IrksPr0Z",
-          "name": "Gmail OAuth2 API"
+          "id": "AojbwGqycL8oEuQK",
+          "name": "Gmail account"
         }
       }
     },
@@ -397,10 +377,10 @@
       "type": "n8n-nodes-base.merge",
       "typeVersion": 3.2,
       "position": [
-        224,
-        -240
+        400,
+        832
       ],
-      "id": "1b0098f0-1291-4568-965c-3ab9f9132e17",
+      "id": "9bc2d739-1c2c-4c15-91e6-cf7b16edea53",
       "name": "Merge"
     },
     {
@@ -441,12 +421,18 @@
               "id": "b3977a72-5d17-49c1-87f8-65e1bb3fdb20",
               "name": "confianza",
               "value": "={{ $json.output.confianza }}",
-              "type": "number"
+              "type": "string"
             },
             {
               "id": "21c612e1-76ae-4976-a730-02a9b6bfa855",
               "name": "status",
               "value": "={{ $json.email_deliverability.status }}",
+              "type": "string"
+            },
+            {
+              "id": "3e984dba-c7b4-4fd5-b981-70471ce91f83",
+              "name": "prioridad",
+              "value": "={{ $('AI Agent').item.json.output.prioridad }}",
               "type": "string"
             }
           ]
@@ -456,10 +442,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        448,
-        -224
+        624,
+        848
       ],
-      "id": "ad63d861-260a-413e-bf99-4e0fb90bff1a",
+      "id": "9041f849-aa30-4184-911f-ed9e896eea9a",
       "name": "Edit Fields2"
     },
     {
@@ -473,16 +459,16 @@
       "type": "n8n-nodes-base.gmail",
       "typeVersion": 2.2,
       "position": [
-        1568,
-        -464
+        1744,
+        752
       ],
-      "id": "13032973-66e2-403f-8268-6ca32eddf0af",
+      "id": "106fcd96-a246-4208-826d-42059e7cb83b",
       "name": "Send a message1",
       "webhookId": "d5b45727-c758-481a-923e-e819cea036cd",
       "credentials": {
         "gmailOAuth2": {
-          "id": "a71U1aO8IrksPr0Z",
-          "name": "Gmail OAuth2 API"
+          "id": "AojbwGqycL8oEuQK",
+          "name": "Gmail account"
         }
       }
     },
@@ -495,15 +481,15 @@
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        1568,
-        -80
+        1744,
+        1136
       ],
-      "id": "b7c54a3f-d7da-4c85-b474-91a77ebb9729",
+      "id": "d9b6f7c1-3123-401f-987a-c8dcee01f09d",
       "name": "Send a text message2",
       "webhookId": "a175449c-f10f-488c-92be-2dd81f5274ff",
       "credentials": {
         "telegramApi": {
-          "id": "cg7huuESesO641Wn",
+          "id": "LHvh9ydZCFvFinUQ",
           "name": "Telegram account"
         }
       }
@@ -517,10 +503,10 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2.1,
       "position": [
-        -576,
-        560
+        -1296,
+        1892
       ],
-      "id": "662e4968-2b2f-4ae6-b924-fa39b721e09d",
+      "id": "b2500220-fedc-4312-ac20-43649e81b348",
       "name": "Webhook1",
       "webhookId": "368f339f-fed8-4a70-94b0-a84f7870174f"
     },
@@ -531,19 +517,19 @@
             {
               "id": "9ff342ec-1331-4750-b515-629dacb13032",
               "name": "accion",
-              "value": "={{ $json.body.accion }}",
+              "value": "={{ $json.body.decision }}",
               "type": "string"
             },
             {
               "id": "b548d7d9-9991-4928-a060-623bb9f83625",
               "name": "fila_registro",
-              "value": "={{ $json.body.registro.fila }}",
+              "value": "={{ $json.body.rowIndex }}",
               "type": "number"
             },
             {
               "id": "616e9b68-7e92-4d57-93bb-baca9b145f37",
               "name": "id_registro",
-              "value": "={{ $json.body.registro.Id_registro }}",
+              "value": "={{ $json.body.rowIndex-1}}",
               "type": "string"
             }
           ]
@@ -553,10 +539,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -352,
-        560
+        -1072,
+        1892
       ],
-      "id": "661eaeba-0a30-46c2-95ea-9d25228273f7",
+      "id": "bf512755-4e04-44f9-b294-bbf799c90817",
       "name": "Edit Fields3"
     },
     {
@@ -581,14 +567,14 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        96,
-        560
+        -624,
+        1892
       ],
-      "id": "e40a4584-4c84-410e-923c-33d367ac6b05",
+      "id": "d16ace14-eabc-4381-bb0c-becdf46b8930",
       "name": "Delete rows or columns from sheet",
       "credentials": {
         "googleSheetsOAuth2Api": {
-          "id": "cpakxWaQFPMyl5io",
+          "id": "KqJ8kawsgpDkOSgl",
           "name": "Google Sheets account"
         }
       }
@@ -622,14 +608,14 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        -128,
-        560
+        -848,
+        1892
       ],
-      "id": "aeadb9a6-96e3-4680-b342-4f61b30f3f8b",
+      "id": "51a1772a-0d46-4b25-88a6-f2b95cd78bb2",
       "name": "Get row(s) in sheet",
       "credentials": {
         "googleSheetsOAuth2Api": {
-          "id": "cpakxWaQFPMyl5io",
+          "id": "KqJ8kawsgpDkOSgl",
           "name": "Google Sheets account"
         }
       }
@@ -661,15 +647,919 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        320,
-        560
+        -400,
+        1892
       ],
-      "id": "e82d30e5-f95f-4ec3-bf04-92ba3575841c",
+      "id": "4f99ad74-02f1-4b77-b772-b2cbda25ee40",
       "name": "If"
     },
     {
       "parameters": {
-        "operation": "appendOrUpdate",
+        "updates": [
+          "message",
+          "callback_query"
+        ],
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -1296,
+        336
+      ],
+      "id": "f597e311-e810-4061-8e3f-db37db6f380d",
+      "name": "Telegram Trigger",
+      "webhookId": "c5250fe6-e678-4cf5-8eec-d08f1efcf775",
+      "credentials": {
+        "telegramApi": {
+          "id": "LHvh9ydZCFvFinUQ",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "7534740046",
+        "text": "👋 Hola, bienvenido al sistema de gestión de solicitudes de inasistencia. ¿Qué deseas hacer? 🤔 Opciones disponibles: 1️⃣ Revisar solicitudes de un estudiante 🔍 (consulta todas sus solicitudes) | 2️⃣ Consultar una solicitud por ID 🆔 (busca una solicitud específica). Selecciona una opción para continuar 👇",
+        "replyMarkup": "inlineKeyboard",
+        "inlineKeyboard": {
+          "rows": [
+            {
+              "row": {
+                "buttons": [
+                  {
+                    "text": "Opcion 1",
+                    "additionalFields": {
+                      "callback_data": "a"
+                    }
+                  },
+                  {
+                    "text": "Opcion 2",
+                    "additionalFields": {
+                      "callback_data": "b"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        -848,
+        432
+      ],
+      "id": "64e54859-ee8f-4948-bb10-43387c5e1bac",
+      "name": "Send a text message3",
+      "webhookId": "76b25d63-0d44-4891-b574-71ca6a4c7345",
+      "credentials": {
+        "telegramApi": {
+          "id": "LHvh9ydZCFvFinUQ",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "sendAndWait",
+        "chatId": "7534740046",
+        "message": "digite el id de estudiante",
+        "responseType": "freeText",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        -848,
+        240
+      ],
+      "id": "8ad3094d-e086-4f6a-abc2-c2a1568ef978",
+      "name": "Send message and wait for response",
+      "webhookId": "d765fddb-e650-48b6-9c5d-084a122f81ad",
+      "credentials": {
+        "telegramApi": {
+          "id": "LHvh9ydZCFvFinUQ",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "3661d686-3fd0-4bf1-8529-697af351960c",
+              "name": "id_estudiante",
+              "value": "={{ $json.data.text }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -624,
+        240
+      ],
+      "id": "00d3a91a-68e0-4904-adc4-b0137b25584c",
+      "name": "Edit Fields4"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "19YyR8JQLbaspzTVqBjmV0mN5ByUznyc3pY_jOYZZjPU",
+          "mode": "list",
+          "cachedResultName": "Sistema Inteligente de Gestión de Justificación de Inasistencias",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/19YyR8JQLbaspzTVqBjmV0mN5ByUznyc3pY_jOYZZjPU/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "aprobadas",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/19YyR8JQLbaspzTVqBjmV0mN5ByUznyc3pY_jOYZZjPU/edit#gid=0"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "id_estudiante",
+              "lookupValue": "={{ $json.id_estudiante }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -400,
+        48
+      ],
+      "id": "f8456971-b5de-4f1c-80f4-a976f95990aa",
+      "name": "Get row(s) in sheet1",
+      "alwaysOutputData": true,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "KqJ8kawsgpDkOSgl",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "19YyR8JQLbaspzTVqBjmV0mN5ByUznyc3pY_jOYZZjPU",
+          "mode": "list",
+          "cachedResultName": "Sistema Inteligente de Gestión de Justificación de Inasistencias",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/19YyR8JQLbaspzTVqBjmV0mN5ByUznyc3pY_jOYZZjPU/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 2017708734,
+          "mode": "list",
+          "cachedResultName": "rechazadas",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/19YyR8JQLbaspzTVqBjmV0mN5ByUznyc3pY_jOYZZjPU/edit#gid=2017708734"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "id_estudiante",
+              "lookupValue": "={{ $json.id_estudiante }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -400,
+        240
+      ],
+      "id": "f781fc69-ee39-4112-882d-81c05cb55b2a",
+      "name": "Get row(s) in sheet2",
+      "alwaysOutputData": true,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "KqJ8kawsgpDkOSgl",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "19YyR8JQLbaspzTVqBjmV0mN5ByUznyc3pY_jOYZZjPU",
+          "mode": "list",
+          "cachedResultName": "Sistema Inteligente de Gestión de Justificación de Inasistencias",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/19YyR8JQLbaspzTVqBjmV0mN5ByUznyc3pY_jOYZZjPU/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1198437236,
+          "mode": "list",
+          "cachedResultName": "pendientes",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/19YyR8JQLbaspzTVqBjmV0mN5ByUznyc3pY_jOYZZjPU/edit#gid=1198437236"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "id_estudiante",
+              "lookupValue": "={{ $json.id_estudiante }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -400,
+        432
+      ],
+      "id": "1cd2e58c-6f14-4fa2-9798-ea44a2e97fb1",
+      "name": "Get row(s) in sheet3",
+      "alwaysOutputData": true,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "KqJ8kawsgpDkOSgl",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "numberInputs": 3
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        -176,
+        128
+      ],
+      "id": "4ba15d60-e1f2-4166-af26-71476fdc0716",
+      "name": "Merge1"
+    },
+    {
+      "parameters": {
+        "chatId": "7534740046",
+        "text": "=📌 Solicitud encontrada\n\n👨‍🎓 Estudiante: {{ $json.name }}\n🆔 ID estudiante: {{ $json.id_estudiante }}\n\n🆔 ID solicitud: {{ $json.ID }}\n📅 Fecha: {{ $json.fecha }}\n📝 Motivo: {{ $json.motivo }}\n📎 Archivo: {{\"https://drive.google.com/file/d/\" + $json[\"file_id\"] + \"/view\"}}\n📌 Estado: {{ $json.decision_ia }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        496,
+        336
+      ],
+      "id": "c37512cc-f4b1-445c-bcf5-dbb5c48fff9b",
+      "name": "Send a text message6",
+      "webhookId": "a175449c-f10f-488c-92be-2dd81f5274ff",
+      "credentials": {
+        "telegramApi": {
+          "id": "LHvh9ydZCFvFinUQ",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "e7935637-c75c-43fb-a8ff-a84d8b14e6b4",
+              "leftValue": "={{ $json.callback_query.data }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "exists",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -1072,
+        336
+      ],
+      "id": "01d457fb-8801-412b-8a36-1c926e47a0f7",
+      "name": "If2"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Ordenar por fecha descendente\nitems.sort((a, b) => {\n  return new Date(b.json.fecha) - new Date(a.json.fecha);\n});\n\n// Tomar los primeros 5\nreturn items;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        48,
+        144
+      ],
+      "id": "a53baa4c-6868-4ec8-8edb-c3186c46a8b8",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "maxItems": 5
+      },
+      "type": "n8n-nodes-base.limit",
+      "typeVersion": 1,
+      "position": [
+        496,
+        144
+      ],
+      "id": "4f488ff1-8e20-4a47-b945-8ecb24e00c86",
+      "name": "Limit"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "5968c33d-c3b7-494f-bd52-ea384da59bf2",
+              "leftValue": "={{ $('Telegram Trigger').item.json.callback_query.data }}",
+              "rightValue": "a",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        272,
+        144
+      ],
+      "id": "30f87c80-065e-4c7d-8c51-93fc9711efe8",
+      "name": "If4"
+    },
+    {
+      "parameters": {
+        "chatId": "7534740046",
+        "text": "=📌 Solicitud encontrada\n\n👨‍🎓 Estudiante: {{ $json.name }}\n🆔 ID estudiante: {{ $json.id_estudiante }}\n\n🆔 ID solicitud: {{ $json.ID }}\n📅 Fecha: {{ $json.fecha }}\n📝 Motivo: {{ $json.motivo }}\n📎 Archivo: {{\"https://drive.google.com/file/d/\" + $json[\"file_id\"] + \"/view\"}}\n📌 Estado: {{ $json.decision_ia }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        720,
+        144
+      ],
+      "id": "13400d04-b440-494f-b926-72e51c60361c",
+      "name": "Send a text message7",
+      "webhookId": "a175449c-f10f-488c-92be-2dd81f5274ff",
+      "credentials": {
+        "telegramApi": {
+          "id": "LHvh9ydZCFvFinUQ",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "19YyR8JQLbaspzTVqBjmV0mN5ByUznyc3pY_jOYZZjPU",
+          "mode": "list",
+          "cachedResultName": "Sistema Inteligente de Gestión de Justificación de Inasistencias",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/19YyR8JQLbaspzTVqBjmV0mN5ByUznyc3pY_jOYZZjPU/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 2017708734,
+          "mode": "list",
+          "cachedResultName": "rechazadas",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/19YyR8JQLbaspzTVqBjmV0mN5ByUznyc3pY_jOYZZjPU/edit#gid=2017708734"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "fecha": "={{ $today }}",
+            "name": "={{ $json.nombre }}",
+            "id_estudiante": "={{ $json.id }}",
+            "correo": "={{ $json.correo }}",
+            "motivo": "={{ $json.motivo }}",
+            "fileName": "={{ $('If1').item.json.fileName }}",
+            "file_id": "={{ $('If1').item.json.fileID }}",
+            "decision_ia": "={{ $('If1').item.json.decision }}",
+            "razon_ia": "={{ $('If1').item.json.razon }}",
+            "confianza_ia": "={{ $('If1').item.json.confianza }}",
+            "prioridad": "={{ $('If1').item.json.prioridad }}"
+          },
+          "matchingColumns": [
+            "fecha"
+          ],
+          "schema": [
+            {
+              "id": "ID",
+              "displayName": "ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "fecha",
+              "displayName": "fecha",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "name",
+              "displayName": "name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "id_estudiante",
+              "displayName": "id_estudiante",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "correo",
+              "displayName": "correo",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "motivo",
+              "displayName": "motivo",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "fileName",
+              "displayName": "fileName",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "file_id",
+              "displayName": "file_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "decision_ia",
+              "displayName": "decision_ia",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "razon_ia",
+              "displayName": "razon_ia",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "confianza_ia",
+              "displayName": "confianza_ia",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "prioridad",
+              "displayName": "prioridad",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        1520,
+        752
+      ],
+      "id": "067c473e-f1f4-4946-bd94-1454e2b09d61",
+      "name": "Append row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "KqJ8kawsgpDkOSgl",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "19YyR8JQLbaspzTVqBjmV0mN5ByUznyc3pY_jOYZZjPU",
+          "mode": "list",
+          "cachedResultName": "Sistema Inteligente de Gestión de Justificación de Inasistencias",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/19YyR8JQLbaspzTVqBjmV0mN5ByUznyc3pY_jOYZZjPU/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "aprobadas",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/19YyR8JQLbaspzTVqBjmV0mN5ByUznyc3pY_jOYZZjPU/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "fecha": "={{ $today }}",
+            "name": "={{ $json.nombre }}",
+            "id_estudiante": "={{ $json.id }}",
+            "correo": "={{ $json.correo }}",
+            "motivo": "={{ $json.motivo }}",
+            "fileName": "={{ $('If1').item.json.fileName }}",
+            "decision_ia": "={{ $('If1').item.json.decision }}",
+            "razon_ia": "={{ $('If1').item.json.razon }}",
+            "confianza_ia": "={{ $('If1').item.json.confianza }}",
+            "file_id": "={{ $('If1').item.json.fileID }}",
+            "prioridad": "={{ $('If1').item.json.prioridad }}"
+          },
+          "matchingColumns": [
+            "fecha"
+          ],
+          "schema": [
+            {
+              "id": "ID",
+              "displayName": "ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "fecha",
+              "displayName": "fecha",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "name",
+              "displayName": "name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "id_estudiante",
+              "displayName": "id_estudiante",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "correo",
+              "displayName": "correo",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "motivo",
+              "displayName": "motivo",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "fileName",
+              "displayName": "fileName",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "file_id",
+              "displayName": "file_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "decision_ia",
+              "displayName": "decision_ia",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "razon_ia",
+              "displayName": "razon_ia",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "confianza_ia",
+              "displayName": "confianza_ia",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "prioridad",
+              "displayName": "prioridad",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        1520,
+        944
+      ],
+      "id": "4e1c459a-6e26-4623-99a9-56e5910c933c",
+      "name": "Append row in sheet1",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "KqJ8kawsgpDkOSgl",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "19YyR8JQLbaspzTVqBjmV0mN5ByUznyc3pY_jOYZZjPU",
+          "mode": "list",
+          "cachedResultName": "Sistema Inteligente de Gestión de Justificación de Inasistencias",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/19YyR8JQLbaspzTVqBjmV0mN5ByUznyc3pY_jOYZZjPU/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1198437236,
+          "mode": "list",
+          "cachedResultName": "pendientes",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/19YyR8JQLbaspzTVqBjmV0mN5ByUznyc3pY_jOYZZjPU/edit#gid=1198437236"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "id_estudiante": "={{ $json.id }}",
+            "correo": "={{ $json.correo }}",
+            "motivo": "={{ $json.motivo }}",
+            "decision_ia": "={{ $('AI Agent').item.json.output.decision }}",
+            "razon_ia": "={{ $('AI Agent').item.json.output.razon }}",
+            "confianza_ia": "={{ $('AI Agent').item.json.output.confianza }}",
+            "fecha": "={{ $today }}",
+            "name": "={{ $json.nombre }}",
+            "fileName": "={{ $('If1').item.json.fileName }}",
+            "file_id": "={{ $('If1').item.json.fileID }}",
+            "prioridad": "={{ $('If1').item.json.prioridad }}"
+          },
+          "matchingColumns": [
+            "fecha"
+          ],
+          "schema": [
+            {
+              "id": "ID",
+              "displayName": "ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "fecha",
+              "displayName": "fecha",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "name",
+              "displayName": "name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "id_estudiante",
+              "displayName": "id_estudiante",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "correo",
+              "displayName": "correo",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "motivo",
+              "displayName": "motivo",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "fileName",
+              "displayName": "fileName",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "file_id",
+              "displayName": "file_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "decision_ia",
+              "displayName": "decision_ia",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "razon_ia",
+              "displayName": "razon_ia",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "confianza_ia",
+              "displayName": "confianza_ia",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "prioridad",
+              "displayName": "prioridad",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        1520,
+        1136
+      ],
+      "id": "efa7fd80-c2cf-4c2b-a2e8-084cef66fb14",
+      "name": "Append row in sheet2",
+      "executeOnce": true,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "KqJ8kawsgpDkOSgl",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
         "documentId": {
           "__rl": true,
           "value": "19YyR8JQLbaspzTVqBjmV0mN5ByUznyc3pY_jOYZZjPU",
@@ -812,21 +1702,21 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        544,
-        464
+        -176,
+        1796
       ],
-      "id": "f27f90a4-79ec-469b-bfa5-191c4ddf1a64",
-      "name": "Append or update row in sheet2",
+      "id": "e1f02e7b-01b4-4247-b60d-26b8b10cd06b",
+      "name": "Append row in sheet3",
       "credentials": {
         "googleSheetsOAuth2Api": {
-          "id": "cpakxWaQFPMyl5io",
+          "id": "KqJ8kawsgpDkOSgl",
           "name": "Google Sheets account"
         }
       }
     },
     {
       "parameters": {
-        "operation": "appendOrUpdate",
+        "operation": "append",
         "documentId": {
           "__rl": true,
           "value": "19YyR8JQLbaspzTVqBjmV0mN5ByUznyc3pY_jOYZZjPU",
@@ -969,133 +1859,17 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        544,
-        656
+        -176,
+        1988
       ],
-      "id": "42eb313f-92bf-4622-a1b7-fd01ef188587",
-      "name": "Append or update row in sheet3",
+      "id": "b7ea268f-cf88-49f6-bf25-e20200100c6d",
+      "name": "Append row in sheet4",
       "credentials": {
         "googleSheetsOAuth2Api": {
-          "id": "cpakxWaQFPMyl5io",
+          "id": "KqJ8kawsgpDkOSgl",
           "name": "Google Sheets account"
         }
       }
-    },
-    {
-      "parameters": {
-        "updates": [
-          "message",
-          "callback_query"
-        ],
-        "additionalFields": {}
-      },
-      "type": "n8n-nodes-base.telegramTrigger",
-      "typeVersion": 1.2,
-      "position": [
-        -576,
-        -784
-      ],
-      "id": "ded58b4c-9582-4ac0-ad49-def72ac23358",
-      "name": "Telegram Trigger",
-      "webhookId": "c5250fe6-e678-4cf5-8eec-d08f1efcf775",
-      "credentials": {
-        "telegramApi": {
-          "id": "cg7huuESesO641Wn",
-          "name": "Telegram account"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "chatId": "7534740046",
-        "text": "👋 Hola, bienvenido al sistema de gestión de solicitudes de inasistencia. ¿Qué deseas hacer? 🤔 Opciones disponibles: 1️⃣ Revisar solicitudes de un estudiante 🔍 (consulta todas sus solicitudes) | 2️⃣ Consultar una solicitud por ID 🆔 (busca una solicitud específica). Selecciona una opción para continuar 👇",
-        "replyMarkup": "inlineKeyboard",
-        "inlineKeyboard": {
-          "rows": [
-            {
-              "row": {
-                "buttons": [
-                  {
-                    "text": "Opcion 1",
-                    "additionalFields": {
-                      "callback_data": "a"
-                    }
-                  },
-                  {
-                    "text": "Opcion 2",
-                    "additionalFields": {
-                      "callback_data": "b"
-                    }
-                  }
-                ]
-              }
-            }
-          ]
-        },
-        "additionalFields": {}
-      },
-      "type": "n8n-nodes-base.telegram",
-      "typeVersion": 1.2,
-      "position": [
-        -128,
-        -688
-      ],
-      "id": "dbe89039-f8ff-45ea-aa6f-dfb4706a8fdb",
-      "name": "Send a text message3",
-      "webhookId": "76b25d63-0d44-4891-b574-71ca6a4c7345",
-      "credentials": {
-        "telegramApi": {
-          "id": "cg7huuESesO641Wn",
-          "name": "Telegram account"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "operation": "sendAndWait",
-        "chatId": "7534740046",
-        "message": "digite el id de estudiante",
-        "responseType": "freeText",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.telegram",
-      "typeVersion": 1.2,
-      "position": [
-        -128,
-        -880
-      ],
-      "id": "997abf51-2fc4-44f4-8151-3b06e079f82e",
-      "name": "Send message and wait for response",
-      "webhookId": "d765fddb-e650-48b6-9c5d-084a122f81ad",
-      "credentials": {
-        "telegramApi": {
-          "id": "cg7huuESesO641Wn",
-          "name": "Telegram account"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "assignments": {
-          "assignments": [
-            {
-              "id": "3661d686-3fd0-4bf1-8529-697af351960c",
-              "name": "id_estudiante",
-              "value": "={{ $json.data.text }}",
-              "type": "string"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.4,
-      "position": [
-        96,
-        -880
-      ],
-      "id": "ea8576f3-ef41-4bb8-9cbc-0d8de10da8c8",
-      "name": "Edit Fields4"
     },
     {
       "parameters": {
@@ -1126,15 +1900,15 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        320,
-        -1072
+        -576,
+        1360
       ],
-      "id": "a870c46b-2b8f-4c3c-a4a0-6c339eb3c299",
-      "name": "Get row(s) in sheet1",
+      "id": "42beec7c-6c8f-40b6-8c88-601c1141c82e",
+      "name": "Get row(s) in sheet4",
       "alwaysOutputData": true,
       "credentials": {
         "googleSheetsOAuth2Api": {
-          "id": "cpakxWaQFPMyl5io",
+          "id": "KqJ8kawsgpDkOSgl",
           "name": "Google Sheets account"
         }
       }
@@ -1168,15 +1942,15 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        320,
-        -880
+        -576,
+        1552
       ],
-      "id": "5441e407-c037-41ea-8425-12b72104b609",
-      "name": "Get row(s) in sheet2",
+      "id": "56e95b40-2a47-48ab-ad4c-09794e547061",
+      "name": "Get row(s) in sheet5",
       "alwaysOutputData": true,
       "credentials": {
         "googleSheetsOAuth2Api": {
-          "id": "cpakxWaQFPMyl5io",
+          "id": "KqJ8kawsgpDkOSgl",
           "name": "Google Sheets account"
         }
       }
@@ -1210,15 +1984,15 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        320,
-        -688
+        -576,
+        1744
       ],
-      "id": "d82200dd-d5c3-4062-91b4-8f6806df980f",
-      "name": "Get row(s) in sheet3",
+      "id": "1d1131ea-4ce5-4059-8db6-22234b3e18a8",
+      "name": "Get row(s) in sheet6",
       "alwaysOutputData": true,
       "credentials": {
         "googleSheetsOAuth2Api": {
-          "id": "cpakxWaQFPMyl5io",
+          "id": "KqJ8kawsgpDkOSgl",
           "name": "Google Sheets account"
         }
       }
@@ -1230,627 +2004,116 @@
       "type": "n8n-nodes-base.merge",
       "typeVersion": 3.2,
       "position": [
-        544,
-        -992
-      ],
-      "id": "c2a23112-c7d6-41c8-aef9-7d1960d35d1a",
-      "name": "Merge1"
-    },
-    {
-      "parameters": {
-        "chatId": "7534740046",
-        "text": "=📌 Solicitud encontrada\n\n👨‍🎓 Estudiante: {{ $json.name }}\n🆔 ID estudiante: {{ $json.id_estudiante }}\n\n🆔 ID solicitud: {{ $json.ID }}\n📅 Fecha: {{ $json.fecha }}\n📝 Motivo: {{ $json.motivo }}\n📎 Archivo: {{\"https://drive.google.com/file/d/\" + $json[\"file_id\"] + \"/view\"}}\n📌 Estado: {{ $json.decision_ia }}",
-        "additionalFields": {}
-      },
-      "type": "n8n-nodes-base.telegram",
-      "typeVersion": 1.2,
-      "position": [
-        1216,
-        -784
-      ],
-      "id": "501a4f26-fa0a-444e-9c26-48123343c19b",
-      "name": "Send a text message6",
-      "webhookId": "a175449c-f10f-488c-92be-2dd81f5274ff",
-      "credentials": {
-        "telegramApi": {
-          "id": "cg7huuESesO641Wn",
-          "name": "Telegram account"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "conditions": {
-          "options": {
-            "caseSensitive": true,
-            "leftValue": "",
-            "typeValidation": "strict",
-            "version": 3
-          },
-          "conditions": [
-            {
-              "id": "e7935637-c75c-43fb-a8ff-a84d8b14e6b4",
-              "leftValue": "={{ $json.callback_query.data }}",
-              "rightValue": "",
-              "operator": {
-                "type": "string",
-                "operation": "exists",
-                "singleValue": true
-              }
-            }
-          ],
-          "combinator": "and"
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.if",
-      "typeVersion": 2.3,
-      "position": [
         -352,
-        -784
+        1632
       ],
-      "id": "ceeec47e-5ae0-4b9a-8230-c18ce9419f3f",
-      "name": "If2"
+      "id": "55e033d0-29d3-4410-a292-dc2e6060a5d1",
+      "name": "Merge2"
     },
     {
       "parameters": {
-        "jsCode": "// Ordenar por fecha descendente\nitems.sort((a, b) => {\n  return new Date(b.json.fecha) - new Date(a.json.fecha);\n});\n\n// Tomar los primeros 5\nreturn items;"
-      },
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        768,
-        -976
-      ],
-      "id": "5b4d4d9b-31b6-4604-8d35-394652715eec",
-      "name": "Code in JavaScript"
-    },
-    {
-      "parameters": {
-        "maxItems": 5
-      },
-      "type": "n8n-nodes-base.limit",
-      "typeVersion": 1,
-      "position": [
-        1216,
-        -976
-      ],
-      "id": "cc52d6a7-1d63-4249-b492-3633e8163531",
-      "name": "Limit"
-    },
-    {
-      "parameters": {
-        "conditions": {
-          "options": {
-            "caseSensitive": true,
-            "leftValue": "",
-            "typeValidation": "strict",
-            "version": 3
-          },
-          "conditions": [
+        "assignments": {
+          "assignments": [
             {
-              "id": "5968c33d-c3b7-494f-bd52-ea384da59bf2",
-              "leftValue": "={{ $('Telegram Trigger').item.json.callback_query.data }}",
-              "rightValue": "a",
-              "operator": {
-                "type": "string",
-                "operation": "equals",
-                "name": "filter.operator.equals"
-              }
+              "id": "3661d686-3fd0-4bf1-8529-697af351960c",
+              "name": "id_estudiante",
+              "value": "={{ $json.id_estudiante }}",
+              "type": "string"
             }
-          ],
-          "combinator": "and"
+          ]
         },
         "options": {}
       },
-      "type": "n8n-nodes-base.if",
-      "typeVersion": 2.3,
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
       "position": [
-        992,
-        -976
+        -800,
+        1552
       ],
-      "id": "67bc7524-49a0-4959-87de-eaf8cab32300",
-      "name": "If4"
+      "id": "29769f18-05f0-4536-9076-f0f6d5ee939e",
+      "name": "Edit Fields5"
     },
     {
       "parameters": {
-        "chatId": "7534740046",
-        "text": "=📌 Solicitud encontrada\n\n👨‍🎓 Estudiante: {{ $json.name }}\n🆔 ID estudiante: {{ $json.id_estudiante }}\n\n🆔 ID solicitud: {{ $json.ID }}\n📅 Fecha: {{ $json.fecha }}\n📝 Motivo: {{ $json.motivo }}\n📎 Archivo: {{\"https://drive.google.com/file/d/\" + $json[\"file_id\"] + \"/view\"}}\n📌 Estado: {{ $json.decision_ia }}",
-        "additionalFields": {}
-      },
-      "type": "n8n-nodes-base.telegram",
-      "typeVersion": 1.2,
-      "position": [
-        1440,
-        -976
-      ],
-      "id": "8a33291a-c4dc-4bfb-90a4-086cf4ec499d",
-      "name": "Send a text message7",
-      "webhookId": "a175449c-f10f-488c-92be-2dd81f5274ff",
-      "credentials": {
-        "telegramApi": {
-          "id": "cg7huuESesO641Wn",
-          "name": "Telegram account"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "operation": "append",
-        "documentId": {
-          "__rl": true,
-          "value": "19YyR8JQLbaspzTVqBjmV0mN5ByUznyc3pY_jOYZZjPU",
-          "mode": "list",
-          "cachedResultName": "Sistema Inteligente de Gestión de Justificación de Inasistencias",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/19YyR8JQLbaspzTVqBjmV0mN5ByUznyc3pY_jOYZZjPU/edit?usp=drivesdk"
-        },
-        "sheetName": {
-          "__rl": true,
-          "value": 2017708734,
-          "mode": "list",
-          "cachedResultName": "rechazadas",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/19YyR8JQLbaspzTVqBjmV0mN5ByUznyc3pY_jOYZZjPU/edit#gid=2017708734"
-        },
-        "columns": {
-          "mappingMode": "defineBelow",
-          "value": {
-            "fecha": "={{ $today }}",
-            "name": "={{ $json.nombre }}",
-            "id_estudiante": "={{ $json.id }}",
-            "correo": "={{ $json.correo }}",
-            "motivo": "={{ $json.motivo }}",
-            "fileName": "={{ $('If1').item.json.fileName }}",
-            "file_id": "={{ $('If1').item.json.fileID }}",
-            "decision_ia": "={{ $('If1').item.json.decision }}",
-            "razon_ia": "={{ $('If1').item.json.razon }}",
-            "confianza_ia": "={{ $('If1').item.json.confianza }}"
-          },
-          "matchingColumns": [
-            "fecha"
-          ],
-          "schema": [
+        "assignments": {
+          "assignments": [
             {
-              "id": "ID",
-              "displayName": "ID",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": true
+              "id": "9953ab42-6048-43e0-a9a3-0d6782a17ae0",
+              "name": "archivo",
+              "value": "archivo",
+              "type": "binary"
             },
             {
-              "id": "fecha",
-              "displayName": "fecha",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
+              "id": "ca30f53e-d631-4bac-a6c1-d026f1c6e903",
+              "name": "nombre",
+              "value": "={{ $json.body.nombre }}",
+              "type": "string"
             },
             {
-              "id": "name",
-              "displayName": "name",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
+              "id": "d4c63f06-94b3-4a75-8d64-9adc07677dad",
+              "name": "id_estudiante",
+              "value": "={{ $json.body.id }}",
+              "type": "string"
             },
             {
-              "id": "id_estudiante",
-              "displayName": "id_estudiante",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
+              "id": "25c7e176-5490-495e-b9e8-fee8e88ff576",
+              "name": "correo",
+              "value": "={{ $json.body.correo }}",
+              "type": "string"
             },
             {
-              "id": "correo",
-              "displayName": "correo",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "motivo",
-              "displayName": "motivo",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "fileName",
-              "displayName": "fileName",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "file_id",
-              "displayName": "file_id",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "decision_ia",
-              "displayName": "decision_ia",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "razon_ia",
-              "displayName": "razon_ia",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "confianza_ia",
-              "displayName": "confianza_ia",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
+              "id": "fbba7fc0-5696-479f-b133-48665062185a",
+              "name": "motivo",
+              "value": "={{ $json.body.motivo }}",
+              "type": "string"
             }
-          ],
-          "attemptToConvertTypes": false,
-          "convertFieldsToString": false
+          ]
         },
         "options": {}
       },
-      "type": "n8n-nodes-base.googleSheets",
-      "typeVersion": 4.7,
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
       "position": [
-        1344,
-        -464
+        -1072,
+        1140
       ],
-      "id": "cb5bc172-866e-4068-85dc-f072e71c26c3",
-      "name": "Append row in sheet",
-      "credentials": {
-        "googleSheetsOAuth2Api": {
-          "id": "cpakxWaQFPMyl5io",
-          "name": "Google Sheets account"
-        }
-      }
+      "id": "54ad2fcb-fff9-4ebf-b1b8-a1493f37b64c",
+      "name": "Edit Fields6"
     },
     {
       "parameters": {
-        "operation": "append",
-        "documentId": {
-          "__rl": true,
-          "value": "19YyR8JQLbaspzTVqBjmV0mN5ByUznyc3pY_jOYZZjPU",
-          "mode": "list",
-          "cachedResultName": "Sistema Inteligente de Gestión de Justificación de Inasistencias",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/19YyR8JQLbaspzTVqBjmV0mN5ByUznyc3pY_jOYZZjPU/edit?usp=drivesdk"
-        },
-        "sheetName": {
-          "__rl": true,
-          "value": "gid=0",
-          "mode": "list",
-          "cachedResultName": "aprobadas",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/19YyR8JQLbaspzTVqBjmV0mN5ByUznyc3pY_jOYZZjPU/edit#gid=0"
-        },
-        "columns": {
-          "mappingMode": "defineBelow",
-          "value": {
-            "fecha": "={{ $today }}",
-            "name": "={{ $json.nombre }}",
-            "id_estudiante": "={{ $json.id }}",
-            "correo": "={{ $json.correo }}",
-            "motivo": "={{ $json.motivo }}",
-            "fileName": "={{ $('If1').item.json.fileName }}",
-            "decision_ia": "={{ $('If1').item.json.decision }}",
-            "razon_ia": "={{ $('If1').item.json.razon }}",
-            "confianza_ia": "={{ $('If1').item.json.confianza }}",
-            "file_id": "={{ $('If1').item.json.fileID }}"
-          },
-          "matchingColumns": [
-            "fecha"
-          ],
-          "schema": [
-            {
-              "id": "ID",
-              "displayName": "ID",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": true
-            },
-            {
-              "id": "fecha",
-              "displayName": "fecha",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "name",
-              "displayName": "name",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "id_estudiante",
-              "displayName": "id_estudiante",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "correo",
-              "displayName": "correo",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "motivo",
-              "displayName": "motivo",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "fileName",
-              "displayName": "fileName",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "file_id",
-              "displayName": "file_id",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "decision_ia",
-              "displayName": "decision_ia",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "razon_ia",
-              "displayName": "razon_ia",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "confianza_ia",
-              "displayName": "confianza_ia",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            }
-          ],
-          "attemptToConvertTypes": false,
-          "convertFieldsToString": false
-        },
+        "mode": "combine",
+        "combineBy": "combineByPosition",
         "options": {}
       },
-      "type": "n8n-nodes-base.googleSheets",
-      "typeVersion": 4.7,
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
       "position": [
-        1344,
-        -272
+        -176,
+        1308
       ],
-      "id": "384cce09-c94d-4b53-b7d7-ea23bb843b22",
-      "name": "Append row in sheet1",
-      "credentials": {
-        "googleSheetsOAuth2Api": {
-          "id": "cpakxWaQFPMyl5io",
-          "name": "Google Sheets account"
-        }
-      }
+      "id": "7c82a62a-3a03-4f1a-8363-c24ba64d124c",
+      "name": "Merge3"
     },
     {
       "parameters": {
-        "operation": "append",
-        "documentId": {
+        "model": {
           "__rl": true,
-          "value": "19YyR8JQLbaspzTVqBjmV0mN5ByUznyc3pY_jOYZZjPU",
           "mode": "list",
-          "cachedResultName": "Sistema Inteligente de Gestión de Justificación de Inasistencias",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/19YyR8JQLbaspzTVqBjmV0mN5ByUznyc3pY_jOYZZjPU/edit?usp=drivesdk"
+          "value": "gpt-5-mini"
         },
-        "sheetName": {
-          "__rl": true,
-          "value": 1198437236,
-          "mode": "list",
-          "cachedResultName": "pendientes",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/19YyR8JQLbaspzTVqBjmV0mN5ByUznyc3pY_jOYZZjPU/edit#gid=1198437236"
-        },
-        "columns": {
-          "mappingMode": "defineBelow",
-          "value": {
-            "id_estudiante": "={{ $json.id }}",
-            "correo": "={{ $json.correo }}",
-            "motivo": "={{ $json.motivo }}",
-            "decision_ia": "={{ $('AI Agent').item.json.output.decision }}",
-            "razon_ia": "={{ $('AI Agent').item.json.output.razon }}",
-            "confianza_ia": "={{ $('AI Agent').item.json.output.confianza }}",
-            "fecha": "={{ $today }}",
-            "name": "={{ $json.nombre }}",
-            "fileName": "={{ $('If1').item.json.fileName }}",
-            "file_id": "={{ $('If1').item.json.fileID }}"
-          },
-          "matchingColumns": [
-            "fecha"
-          ],
-          "schema": [
-            {
-              "id": "ID",
-              "displayName": "ID",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": true
-            },
-            {
-              "id": "fecha",
-              "displayName": "fecha",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "name",
-              "displayName": "name",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "id_estudiante",
-              "displayName": "id_estudiante",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "correo",
-              "displayName": "correo",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "motivo",
-              "displayName": "motivo",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "fileName",
-              "displayName": "fileName",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "file_id",
-              "displayName": "file_id",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "decision_ia",
-              "displayName": "decision_ia",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "razon_ia",
-              "displayName": "razon_ia",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "confianza_ia",
-              "displayName": "confianza_ia",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            }
-          ],
-          "attemptToConvertTypes": false,
-          "convertFieldsToString": false
-        },
+        "builtInTools": {},
         "options": {}
       },
-      "type": "n8n-nodes-base.googleSheets",
-      "typeVersion": 4.7,
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
       "position": [
-        1344,
-        -80
+        48,
+        1536
       ],
-      "id": "9c9d88b1-8112-4bc7-a8fa-dd9ec31c62e8",
-      "name": "Append row in sheet2",
-      "executeOnce": true,
-      "credentials": {
-        "googleSheetsOAuth2Api": {
-          "id": "cpakxWaQFPMyl5io",
-          "name": "Google Sheets account"
-        }
-      }
+      "id": "6cd4b2ae-1d95-431d-a388-f3c8d3fffe7f",
+      "name": "OpenAI Chat Model",
+      "credentials": {}
     }
   ],
   "connections": {
@@ -1858,17 +2121,12 @@
       "main": [
         [
           {
-            "node": "AI Agent",
-            "type": "main",
-            "index": 0
-          },
-          {
             "node": "Upload file",
             "type": "main",
             "index": 0
           },
           {
-            "node": "HTTP Request",
+            "node": "Edit Fields6",
             "type": "main",
             "index": 0
           }
@@ -1951,17 +2209,6 @@
         ]
       ]
     },
-    "Google Gemini Chat Model": {
-      "ai_languageModel": [
-        [
-          {
-            "node": "AI Agent",
-            "type": "ai_languageModel",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Upload file": {
       "main": [
         [
@@ -1981,8 +2228,7 @@
             "type": "main",
             "index": 1
           }
-        ],
-        []
+        ]
       ]
     },
     "If1": {
@@ -2073,14 +2319,14 @@
       "main": [
         [
           {
-            "node": "Append or update row in sheet2",
+            "node": "Append row in sheet3",
             "type": "main",
             "index": 0
           }
         ],
         [
           {
-            "node": "Append or update row in sheet3",
+            "node": "Append row in sheet4",
             "type": "main",
             "index": 0
           }
@@ -2174,11 +2420,6 @@
         ]
       ]
     },
-    "Send a text message6": {
-      "main": [
-        []
-      ]
-    },
     "If2": {
       "main": [
         [
@@ -2269,11 +2510,119 @@
           }
         ]
       ]
+    },
+    "Get row(s) in sheet4": {
+      "main": [
+        [
+          {
+            "node": "Merge2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet5": {
+      "main": [
+        [
+          {
+            "node": "Merge2",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet6": {
+      "main": [
+        [
+          {
+            "node": "Merge2",
+            "type": "main",
+            "index": 2
+          }
+        ]
+      ]
+    },
+    "Merge2": {
+      "main": [
+        [
+          {
+            "node": "Merge3",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Edit Fields5": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet4",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Get row(s) in sheet5",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Get row(s) in sheet6",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields6": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Edit Fields5",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Merge3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge3": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "pinData": {},
   "meta": {
     "templateCredsSetupCompleted": true,
-    "instanceId": "b78bb889dab75452ebe597fb9c2fbbeb90b616c99a2191f4d5fb9e9720ec381b"
+    "instanceId": "d60bbbc18b6e2b708f498961bdc6cdde4ffe8ba4aba4ec69da26115a964ce9ed"
   }
 }
