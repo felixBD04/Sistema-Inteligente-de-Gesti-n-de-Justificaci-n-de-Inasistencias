@@ -9,8 +9,8 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2.1,
       "position": [
-        -1296,
-        896
+        -1824,
+        992
       ],
       "id": "32e9fa9f-39d1-4d5b-b8a6-320bf237d405",
       "name": "Webhook",
@@ -23,8 +23,8 @@
       "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
       "typeVersion": 1.3,
       "position": [
-        184,
-        1532
+        408,
+        1624
       ],
       "id": "7a677010-1e0d-49c6-960b-f164df7bb5c7",
       "name": "Structured Output Parser"
@@ -70,8 +70,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        1072,
-        848
+        1296,
+        840
       ],
       "id": "ffc71e7e-cf39-4434-af17-8a33d42086cb",
       "name": "Edit Fields"
@@ -153,8 +153,8 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.4,
       "position": [
-        1296,
-        832
+        1520,
+        824
       ],
       "id": "a92faa1b-c6b9-4dca-ab1b-8dc0de691907",
       "name": "Switch"
@@ -168,8 +168,8 @@
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        400,
-        1356
+        624,
+        1448
       ],
       "id": "903ef6cb-4902-4d6c-9475-0eb032af44bf",
       "name": "Send a text message",
@@ -191,8 +191,8 @@
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 3.1,
       "position": [
-        48,
-        1308
+        272,
+        1400
       ],
       "id": "8600168f-38b2-4887-a461-351056f68a06",
       "name": "AI Agent",
@@ -231,8 +231,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        112,
-        656
+        336,
+        848
       ],
       "id": "ed2f0c18-af0c-4d5e-a5f5-d49fcf52bbcc",
       "name": "Edit Fields1"
@@ -260,8 +260,8 @@
       "type": "n8n-nodes-base.googleDrive",
       "typeVersion": 3,
       "position": [
-        -176,
-        656
+        48,
+        848
       ],
       "id": "1d51d438-0ca1-4814-b0eb-614740a1ac0b",
       "name": "Upload file",
@@ -274,14 +274,14 @@
     },
     {
       "parameters": {
-        "url": "=https://emailreputation.abstractapi.com/v1/?api_key=27b367b299394fd1b17f18cda5f3c4ee&email={{ $json.correo }}",
+        "url": "=https://emailreputation.abstractapi.com/v1/?api_key=27b367b299394fd1b17f18cda5f3c4ee&email={{ $json.correo_modificado }}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        112,
-        848
+        336,
+        656
       ],
       "id": "16c8fc18-9283-44ee-bd4d-34a8899e588c",
       "name": "HTTP Request",
@@ -315,8 +315,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        848,
-        848
+        1072,
+        844
       ],
       "id": "d2434dc8-4449-4f0d-843c-550b636d5de7",
       "name": "If1"
@@ -330,8 +330,8 @@
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        1072,
-        1040
+        1296,
+        1032
       ],
       "id": "9d84947f-6202-46c7-b8dc-4e4b55ea05f3",
       "name": "Send a text message1",
@@ -354,8 +354,8 @@
       "type": "n8n-nodes-base.gmail",
       "typeVersion": 2.2,
       "position": [
-        1744,
-        944
+        1968,
+        936
       ],
       "id": "9bb054e1-c354-458c-9e83-cc53c9fc5db6",
       "name": "Send a message",
@@ -377,8 +377,8 @@
       "type": "n8n-nodes-base.merge",
       "typeVersion": 3.2,
       "position": [
-        400,
-        832
+        624,
+        828
       ],
       "id": "9bc2d739-1c2c-4c15-91e6-cf7b16edea53",
       "name": "Merge"
@@ -442,8 +442,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        624,
-        848
+        848,
+        844
       ],
       "id": "9041f849-aa30-4184-911f-ed9e896eea9a",
       "name": "Edit Fields2"
@@ -459,8 +459,8 @@
       "type": "n8n-nodes-base.gmail",
       "typeVersion": 2.2,
       "position": [
-        1744,
-        752
+        1968,
+        744
       ],
       "id": "106fcd96-a246-4208-826d-42059e7cb83b",
       "name": "Send a message1",
@@ -481,8 +481,8 @@
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        1744,
-        1136
+        1968,
+        1128
       ],
       "id": "d9b6f7c1-3123-401f-987a-c8dcee01f09d",
       "name": "Send a text message2",
@@ -504,7 +504,7 @@
       "typeVersion": 2.1,
       "position": [
         -1296,
-        1892
+        1984
       ],
       "id": "b2500220-fedc-4312-ac20-43649e81b348",
       "name": "Webhook1",
@@ -540,7 +540,7 @@
       "typeVersion": 3.4,
       "position": [
         -1072,
-        1892
+        1984
       ],
       "id": "bf512755-4e04-44f9-b294-bbf799c90817",
       "name": "Edit Fields3"
@@ -568,7 +568,7 @@
       "typeVersion": 4.7,
       "position": [
         -624,
-        1892
+        1984
       ],
       "id": "d16ace14-eabc-4381-bb0c-becdf46b8930",
       "name": "Delete rows or columns from sheet",
@@ -609,7 +609,7 @@
       "typeVersion": 4.7,
       "position": [
         -848,
-        1892
+        1984
       ],
       "id": "51a1772a-0d46-4b25-88a6-f2b95cd78bb2",
       "name": "Get row(s) in sheet",
@@ -648,7 +648,7 @@
       "typeVersion": 2.3,
       "position": [
         -400,
-        1892
+        1984
       ],
       "id": "4f99ad74-02f1-4b77-b772-b2cbda25ee40",
       "name": "If"
@@ -1202,8 +1202,8 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        1520,
-        752
+        1744,
+        744
       ],
       "id": "067c473e-f1f4-4946-bd94-1454e2b09d61",
       "name": "Append row in sheet",
@@ -1373,8 +1373,8 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        1520,
-        944
+        1744,
+        936
       ],
       "id": "4e1c459a-6e26-4623-99a9-56e5910c933c",
       "name": "Append row in sheet1",
@@ -1544,8 +1544,8 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        1520,
-        1136
+        1744,
+        1128
       ],
       "id": "efa7fd80-c2cf-4c2b-a2e8-084cef66fb14",
       "name": "Append row in sheet2",
@@ -1703,7 +1703,7 @@
       "typeVersion": 4.7,
       "position": [
         -176,
-        1796
+        1888
       ],
       "id": "e1f02e7b-01b4-4247-b60d-26b8b10cd06b",
       "name": "Append row in sheet3",
@@ -1860,7 +1860,7 @@
       "typeVersion": 4.7,
       "position": [
         -176,
-        1988
+        2080
       ],
       "id": "b7ea268f-cf88-49f6-bf25-e20200100c6d",
       "name": "Append row in sheet4",
@@ -1900,8 +1900,8 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        -576,
-        1360
+        -400,
+        1280
       ],
       "id": "42beec7c-6c8f-40b6-8c88-601c1141c82e",
       "name": "Get row(s) in sheet4",
@@ -1942,8 +1942,8 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        -576,
-        1552
+        -400,
+        1472
       ],
       "id": "56e95b40-2a47-48ab-ad4c-09794e547061",
       "name": "Get row(s) in sheet5",
@@ -1984,8 +1984,8 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        -576,
-        1744
+        -400,
+        1664
       ],
       "id": "1d1131ea-4ce5-4059-8db6-22234b3e18a8",
       "name": "Get row(s) in sheet6",
@@ -2004,8 +2004,8 @@
       "type": "n8n-nodes-base.merge",
       "typeVersion": 3.2,
       "position": [
-        -352,
-        1632
+        -176,
+        1464
       ],
       "id": "55e033d0-29d3-4410-a292-dc2e6060a5d1",
       "name": "Merge2"
@@ -2027,8 +2027,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -800,
-        1552
+        -624,
+        1568
       ],
       "id": "29769f18-05f0-4536-9076-f0f6d5ee939e",
       "name": "Edit Fields5"
@@ -2074,8 +2074,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -1072,
-        1140
+        -1520,
+        976
       ],
       "id": "54ad2fcb-fff9-4ebf-b1b8-a1493f37b64c",
       "name": "Edit Fields6"
@@ -2089,8 +2089,8 @@
       "type": "n8n-nodes-base.merge",
       "typeVersion": 3.2,
       "position": [
-        -176,
-        1308
+        80,
+        1120
       ],
       "id": "7c82a62a-3a03-4f1a-8363-c24ba64d124c",
       "name": "Merge3"
@@ -2108,23 +2108,96 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
       "typeVersion": 1.3,
       "position": [
-        48,
-        1536
+        280,
+        1624
       ],
       "id": "6cd4b2ae-1d95-431d-a388-f3c8d3fffe7f",
       "name": "OpenAI Chat Model",
       "credentials": {}
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "7b077580-f932-4643-9d39-3cf1856253d5",
+              "name": "correo_modificado",
+              "value": "={{ $json.correo.toLowerCase().replace(/\\s+/g, '')}}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        48,
+        656
+      ],
+      "id": "c9ed0a06-d98d-46a6-bd4c-351553ebf1af",
+      "name": "Edit Fields7"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "20d8f118-2116-43f2-9428-cbb7f6188c17",
+              "leftValue": "={{$binary.archivo.mimeType.substring(0, 5)}}",
+              "rightValue": "image",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -1264,
+        1120
+      ],
+      "id": "4d429e96-ccdf-486c-b4da-744c089d0e10",
+      "name": "If3"
+    },
+    {
+      "parameters": {
+        "chatId": "7534740046",
+        "text": "el tipo del archivo no conicide",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        -976,
+        1440
+      ],
+      "id": "081e7759-bcc9-462d-a294-7db5f3a086b5",
+      "name": "Send a text message4",
+      "webhookId": "a175449c-f10f-488c-92be-2dd81f5274ff",
+      "credentials": {
+        "telegramApi": {
+          "id": "LHvh9ydZCFvFinUQ",
+          "name": "Telegram account"
+        }
+      }
     }
   ],
   "connections": {
     "Webhook": {
       "main": [
         [
-          {
-            "node": "Upload file",
-            "type": "main",
-            "index": 0
-          },
           {
             "node": "Edit Fields6",
             "type": "main",
@@ -2580,17 +2653,12 @@
       "main": [
         [
           {
-            "node": "HTTP Request",
+            "node": "Edit Fields7",
             "type": "main",
             "index": 0
           },
           {
-            "node": "Edit Fields5",
-            "type": "main",
-            "index": 0
-          },
-          {
-            "node": "Merge3",
+            "node": "If3",
             "type": "main",
             "index": 0
           }
@@ -2614,6 +2682,45 @@
           {
             "node": "AI Agent",
             "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields7": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If3": {
+      "main": [
+        [
+          {
+            "node": "Upload file",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Edit Fields5",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Merge3",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Send a text message4",
+            "type": "main",
             "index": 0
           }
         ]
