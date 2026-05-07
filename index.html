@@ -4,26 +4,29 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Justificación de Inasistencia — CampusLands</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/formulario.css">
 </head>
 <body>
 
-  <!-- ── Navbar ───────────────────────────────────────────── -->
+  <!-- Fondo cósmico animado -->
+  <canvas id="cosmos-canvas"></canvas>
+
+  <!-- ── Navbar ──────────────────────────────────────────────── -->
   <nav class="navbar">
     <a class="navbar-brand" href="index.html">
-      <div class="brand-icon">✦</div>
+      <div class="brand-icon">⦾</div>
       <div>
         <div class="brand-text">Sistema de Inasistencias</div>
         <div class="brand-sub">Campus Lands</div>
       </div>
     </a>
-
     <ul class="navbar-nav">
       <li>
-        <a href="index.html" class="active">
-          Formulario
-        </a>
+        <a href="index.html" class="active">Formulario</a>
       </li>
       <li>
         <a href="prueba_pagina_pendientes.html">
@@ -34,7 +37,7 @@
     </ul>
   </nav>
 
-  <!-- ── Contenido ────────────────────────────────────────── -->
+  <!-- ── Contenido ────────────────────────────────────────────── -->
   <main class="page-wrapper">
 
     <div class="page-header">
@@ -129,13 +132,13 @@
             <label class="form-label">
               Documento de soporte <span class="req">*</span>
             </label>
-            <div class="file-upload-area">
+            <div class="file-upload-area" id="drop-area">
               <input type="file" id="archivo" name="archivo" required accept=".pdf,.jpg,.jpeg,.png,.doc,.docx">
-              <span class="file-upload-icon">↑</span>
+              <div class="file-upload-icon">⬆️</div>
               <div class="file-upload-text">
-                <strong>Haz clic o arrastra aquí</strong> tu archivo<br>
-                PDF, imagen o documento · máx. 10 MB
+                <strong>Haz clic o arrastra aquí</strong> tu archivo
               </div>
+              <div class="file-upload-hint">PDF, imagen o documento &middot; máx. 10 MB</div>
             </div>
             <span class="file-name" id="file-name"></span>
           </div>
@@ -145,7 +148,7 @@
         <div class="divider"></div>
 
         <div class="form-actions">
-          <button type="reset" class="btn btn-outline" onclick="location.reload()">
+          <button type="button" class="btn btn-outline" id="btn-limpiar">
             Limpiar
           </button>
           <button type="submit" class="btn btn-primary btn-submit" id="btn-enviar">
@@ -159,8 +162,8 @@
 
   </main>
 
-  <!-- Toast -->
-  <div class="toast" id="toast"></div>
+  <!-- Toast container -->
+  <div id="toast"></div>
 
   <script src="js/utils.js"></script>
   <script src="js/formulario.js"></script>
